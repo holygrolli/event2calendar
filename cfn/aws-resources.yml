@@ -13,7 +13,7 @@ Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
-      DefinitionUri: ./api.yaml
+      DefinitionUri: ./api.yml
       StageName: prod
       Variables:
         LambdaFunctionName: !Ref ParseEventFromUrlFunction
