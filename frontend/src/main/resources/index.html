@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calendar Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <style type="text/css">
+        #loading {
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 ) 
+                        url('ajax-loader.gif') 
+                        50% 50% 
+                        no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">ATC Service</a>
+        </div>
+    </div>
+    <div id="intro" class="container">
+        <div>
+            <h2>Was?</h2>
+            <p>Dieser Dienst ermöglicht dir, Kalendereinträge aus unterstützten Websites zu extrahieren. Damit kannst du dir ein eigenes Konferenz-/Festival-Programm zusammenstellen.
+        </div>
+        <div>
+            <h2>Wie?</h2>
+            <p>Füge einfach den nachfolgenden Link durch Ziehen in deine Lesezeichenleiste ein:</p>
+            <p>
+                <a href="javascript: (function () { 
+    window.open('http://atc.networkchallenge.de/index.html?url=' + encodeURIComponent(window.btoa(document.URL)),'addtocalendarevent');
+ }());" class="btn btn-success btn-lg" role="button">+AddToCalendar</a>
+
+            </p>
+            <p>Besuche dann eine unterstützte Seite, wähle eine Veranstaltung aus, die dich interessiert und klicke dann auf das zuvor erstellte Lesezeichen. Es öffnet sich ein neues Fenster, in welchem dir die Möglichkeit geboten wird, das Ereignis zu deinem Google Calendar hinzuzufügen.
+        </div>
+    </div>
+    <div id="main" class="popup">
+        <div data-bind="foreach: calendarEvents">
+            <p><b data-bind="text: eventTitle"></b></p>
+            <p>
+                <span data-bind="text: eventBegin"></span>
+                -
+                <span data-bind="text: eventEnd"></span>
+            </p>
+            <p>
+                <button data-bind="click: $parent.addToGoogle" class="btn">Add to Google</button>
+            </p>
+        </div>
+    </div>
+    <div id="loading"/>
+
+    <script type="text/javascript">
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+
+            var params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+
+            while (tokens = re.exec(qs)) {
+                params[tokens[1]] = tokens[2];
+            }
+
+            return params;
+        }
+        
+        function TasksViewModel() {
+            var self = this;
+            self.tasksURI = 'https://ztz9cvgt1j.execute-api.eu-central-1.amazonaws.com/prod';
+            self.ajax = function(uri, method, data) {
+                var request = {
+                    url: uri,
+                    type: method,
+                    contentType: "application/json",
+                    accepts: {
+                        json: "application/json"
+                    },
+                    cache: true,
+                    dataType: 'json',
+                    //data: JSON.stringify(data),
+                    /*beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", 
+                            "Basic " + btoa(self.username + ":" + self.password));
+                    },*/
+                    beforeSend: function(){$("#loading").show();},
+                    complete: function(){$("#loading").hide();},
+                    error: function(jqXHR, errorString, exception) {
+                        console.log("ajax error " + jqXHR.status);
+                    }
+                };
+                return $.ajax(request);
+            }
+            self.calendarEvents = ko.observableArray([]);
+            /*self.googleUrl = ko.computed(function()
+            {
+                return "http://www.google.com/calendar/event?action=TEMPLATE&text=" + self.calendarEvent().eventTitle + "&dates=" + self.calendarEvent().eventBegin + "/" + self.calendarEvent().eventEnd + "&details=" + self.calendarEvent().eventSource;
+            });
+*/
+            self.addToGoogle = function(cal) {
+                window.open("http://www.google.com/calendar/event?action=TEMPLATE&text=" + cal.eventTitle + "&dates=" + cal.eventBegin + "/" + cal.eventEnd + "&details=" + cal.eventSource, "_self");
+                //window.open(self.googleUrl(), "_self");
+            }
+            if (getQueryParams(window.location.search.substring(1))['url'] != null)
+                self.ajax(self.tasksURI + '/url/' + getQueryParams(window.location.search.substring(1))['url'], 'GET').done(function(data) {
+                    self.calendarEvents(
+                        data.events
+                        )
+                });
+        }
+        ko.applyBindings(new TasksViewModel(), $('#main')[0]);
+        $(document).ready(function(){
+            if(getQueryParams(window.location.search.substring(1))['url'] != null)
+            {
+                $("#intro").hide();
+                $("#main").show();
+            }
+            else
+            {
+                $("#intro").show();
+                $("#main").hide();
+            }
+        });
+        $(document)
+            .ajaxStart(function(){
+                $("#loading").show();
+            })
+            .ajaxStop(function(){
+                $("#loading").hide();
+            });
+    </script>
+</body>
+</html>

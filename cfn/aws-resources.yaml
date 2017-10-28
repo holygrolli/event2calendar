@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      DefinitionUri: ./api.yaml
+      StageName: prod
+      Variables:
+        LambdaFunctionName: !Ref ParseEventFromUrlFunction
+
+  AddToCalendarBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      AccessControl: PublicRead
+      BucketName: e2c.networkchallenge.de
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  ParseEventFromUrlFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../lambda.backend/target/lambda.backend.jar
+      Handler: de.networkchallenge.e2c.lambda.backend.MainHandler
+      Runtime: java8
+      MemorySize: 256
+      Timeout: 30
+      Environment:
+        Variables:
+          BUCKET: !Ref AddToCalendarBucket
+          URL: !GetAtt AddToCalendarBucket.WebsiteURL
+      Policies:
+          Statement:
+            - Resource: !Sub arn:aws:s3:::${AddToCalendarBucket}/*
+              Effect: Allow
+              Action:
+                - s3:PutObject
+
+  ParseEventFromUrlFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ParseEventFromUrlFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*
+
+  AddToCalendarBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AddToCalendarBucket
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Principal: "*"
+            Resource: !Sub arn:aws:s3:::${AddToCalendarBucket}/*
+
+Outputs:
+  BucketWebsiteUrl:
+    Value: !GetAtt AddToCalendarBucket.WebsiteURL
+  Bucket:
+    Value: !Ref AddToCalendarBucket
