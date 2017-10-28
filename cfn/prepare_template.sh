@@ -2,6 +2,9 @@
 
 set -o errexit
 
+echo testing output
+aws configure get region
+aws sts get-caller-identity --query Account --output text | xargs echo -n
 region="$(aws configure get region)"
 account_id="$(aws sts get-caller-identity --query Account --output text | xargs echo -n)"
 echo using account ${account_id} in ${region}
