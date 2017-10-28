@@ -6,11 +6,9 @@ phases:
       - echo Entering build phase...
       - echo Build started on `date`
       - mvn package
-      - region="$(aws configure get region)"
-      - account_id="$(aws sts get-caller-identity --query Account --output text | xargs echo -n)"
-      - echo using account ${account_id} in ${region}
       - cd cfn
-      - sed -e "s/REGION/${region}/g" -e "s/ACCOUNT_ID/${account_id}/g" api-template.yaml > api.yaml
+      - chmod +x prepare_template.sh
+      - ./prepare_template.sh
       - aws cloudformation package --template api.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
 artifacts:
   files:
