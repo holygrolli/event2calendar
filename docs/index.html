@@ -27,7 +27,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-inner">
-            <a class="brand" href="#">ATC Service</a>
+            <a class="brand" href="#">Event to Calendar Service</a>
         </div>
     </div>
     <div id="intro" class="container">
@@ -58,6 +58,7 @@
     <div id="main" class="popup">
         <div data-bind="foreach: calendarEvents">
             <p><b data-bind="text: eventTitle"></b></p>
+            <p><span data-bind="text: eventLocation"></span></p>
             <p>
                 <span data-bind="text: eventBegin"></span>
                 -
@@ -110,7 +111,7 @@
                     }
                 };
                 return $.ajax(request);
-            }
+            };
             self.calendarEvents = ko.observableArray([]);
             /*self.googleUrl = ko.computed(function()
             {
@@ -118,9 +119,9 @@
             });
 */
             self.addToGoogle = function(cal) {
-                window.open("http://www.google.com/calendar/event?action=TEMPLATE&text=" + cal.eventTitle + "&dates=" + cal.eventBegin + "/" + cal.eventEnd + "&details=" + cal.eventSource, "_self");
+                window.open("http://www.google.com/calendar/event?action=TEMPLATE&text=" + cal.eventTitle + "&dates=" + cal.eventBegin + "/" + cal.eventEnd + "&location=" + cal.eventLocation + "&details=" + cal.eventSource, "_self");
                 //window.open(self.googleUrl(), "_self");
-            }
+            };
             if (getQueryParams(window.location.search.substring(1))['url'] != null)
                 self.ajax(self.tasksURI + '/url/' + getQueryParams(window.location.search.substring(1))['url'], 'GET').done(function(data) {
                     self.calendarEvents(
