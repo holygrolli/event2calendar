@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,8 +22,8 @@ public class DokLeipzigParser implements IEventParser {
     private final static TimeParser TP = new TimeParser("dd.MM.yyyy HH:mm", Locale.GERMANY);
 
     @Override
-    public String getBaseUri() {
-        return "films2017.dok-leipzig.de";
+    public List<String> getBaseUris() {
+        return Arrays.asList("films2017.dok-leipzig.de","filmfinder.dok-leipzig.de");
     }
 
     @Override

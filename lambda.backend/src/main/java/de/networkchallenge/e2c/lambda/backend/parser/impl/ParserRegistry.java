@@ -24,7 +24,8 @@ public class ParserRegistry {
 
 	@PostConstruct
 	public void init() {
-		parsers.forEach(parser -> urlMapping.put(parser.getBaseUri(), parser));
+		parsers.forEach(parser -> parser.getBaseUris() //
+				.forEach(url -> urlMapping.put(url, parser)));
 	}
 
 	public Optional<IEventParser> getParserForUrl(String url) {

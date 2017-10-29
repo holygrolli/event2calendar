@@ -11,15 +11,15 @@ import java.util.List;
  */
 public interface IEventParser {
 	/**
-	 * Returns the base URI, i.e. FQDN of the target site which the parser is
+	 * Returns the base URIs, i.e. FQDN of the target site which the parser is
 	 * built for. This is everything of the target URL without protocol and
 	 * path. For example a parser for events of
 	 * https://events.example.com/event/some_event should return
 	 * "events.example.com"
 	 * 
-	 * @return {@link String} of the base URI
+	 * @return {@link List} of {@link String} with the base URIs
 	 */
-	public String getBaseUri();
+	List<String> getBaseUris();
 
 	/**
 	 * Parses a site for an event, extracts the event and returns it as
@@ -29,6 +29,6 @@ public interface IEventParser {
 	 *            the {@link Document} of the event page
 	 * @return
 	 */
-	public List<CalendarEvent> parse(Document doc);
+	List<CalendarEvent> parse(Document doc);
 
 }

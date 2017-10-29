@@ -44,8 +44,8 @@ public class DevOpsConParser implements IEventParser {
 	}
 
 	@Override
-	public String getBaseUri() {
-		return "devopsconference.de";
+	public List<String> getBaseUris() {
+		return Arrays.asList("devopsconference.de");
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class AzureSaturdayParser implements IEventParser {
 	}
 
 	@Override
-	public String getBaseUri() {
-		return "azuresaturday.de";
+	public List<String> getBaseUris() {
+		return Arrays.asList("azuresaturday.de");
 	}
 
 	@Override
