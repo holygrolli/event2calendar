@@ -40,11 +40,19 @@
             <p>Füge einfach den nachfolgenden Link durch Ziehen in deine Lesezeichenleiste ein:</p>
             <p>
                 <a href="javascript: (function () { 
-    window.open('http://atc.networkchallenge.de/index.html?url=' + encodeURIComponent(window.btoa(document.URL)),'addtocalendarevent');
+    window.open('http://e2c.networkchallenge.de/index.html?url=' + encodeURIComponent(window.btoa(document.URL)),'addtocalendarevent');
  }());" class="btn btn-success btn-lg" role="button">+AddToCalendar</a>
 
             </p>
             <p>Besuche dann eine unterstützte Seite, wähle eine Veranstaltung aus, die dich interessiert und klicke dann auf das zuvor erstellte Lesezeichen. Es öffnet sich ein neues Fenster, in welchem dir die Möglichkeit geboten wird, das Ereignis zu deinem Google Calendar hinzuzufügen.
+        </div>
+        <div>
+            <h2>Neues?</h2>
+            <h3>29. Oktober 2017</h3>
+            <p>
+                Neben der bisherigen Unterstützung von <a href="https://azuresaturday.de">azuresaturday.de</a> und <a href="//devopsconference.de">DevOpsCon Berlin</a> hat sich nun das
+                <a href="//www.dok-leipzig.de">DOK-Festival Leipzig</a> dazugesellt.
+            </p>
         </div>
     </div>
     <div id="main" class="popup">
@@ -79,7 +87,7 @@
         
         function TasksViewModel() {
             var self = this;
-            self.tasksURI = 'https://ztz9cvgt1j.execute-api.eu-central-1.amazonaws.com/prod';
+            self.tasksURI = 'https://si8peo4se4.execute-api.eu-central-1.amazonaws.com/prod';
             self.ajax = function(uri, method, data) {
                 var request = {
                     url: uri,

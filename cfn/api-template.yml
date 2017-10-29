@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  title: AddToCalendarApi
+  title: EventToCalendarApi
 basePath: /prod
 schemes:
   - https
