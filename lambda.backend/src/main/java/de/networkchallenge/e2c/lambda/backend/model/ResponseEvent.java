@@ -6,6 +6,7 @@ public class ResponseEvent {
     private String eventBegin;
     private String eventEnd;
     private String eventSource;
+    private String eventLocation;
 
     public String getEventTitle() {
         return eventTitle;
@@ -40,6 +41,15 @@ public class ResponseEvent {
 
     public ResponseEvent setEventSource(String eventSource) {
         this.eventSource = eventSource;
+        return this;
+    }
+
+    public String getEventLocation() {
+        return eventLocation;
+    }
+
+    public ResponseEvent setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
         return this;
     }
 }

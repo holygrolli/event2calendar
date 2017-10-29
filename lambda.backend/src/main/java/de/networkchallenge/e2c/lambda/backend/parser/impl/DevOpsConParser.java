@@ -50,6 +50,6 @@ public class DevOpsConParser implements IEventParser {
 
 	@Override
 	public List<CalendarEvent> parse(Document doc) {
-		return Arrays.asList(new CalendarEvent(parseTitle(doc), parseBegin(doc), parseEnd(doc)));
+		return Arrays.asList(new CalendarEvent(parseTitle(doc), parseBegin(doc), parseEnd(doc), ""));
 	}
 }

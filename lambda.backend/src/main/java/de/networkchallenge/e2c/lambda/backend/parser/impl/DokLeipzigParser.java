@@ -36,8 +36,22 @@ public class DokLeipzigParser implements IEventParser {
         return calendarEvents;
     }
 
-    private CalendarEvent parseEventItem(Element element, String title) {
-        return new CalendarEvent(title, parseBegin(element), parseEnd(element));
+    private CalendarEvent parseEventItem(Element event, String title) {
+        return new CalendarEvent(title, parseBegin(event), parseEnd(event), parseLocation(event));
+    }
+
+    private String parseLocation(Element element) {
+        String location = "";
+        if (element.select("table").size()>0)
+        {
+            Elements table_label = element.select("div label");
+            location = table_label.get(0).text();
+        }
+        else {
+            location = element.select("label").get(0).text();
+        }
+
+        return location;
     }
 
     private Elements findEventItems(Document doc) {
@@ -53,17 +67,17 @@ public class DokLeipzigParser implements IEventParser {
         return parseBegin(element).plusMinutes(90);
     }
 
-    private ZonedDateTime parseBegin(Element element) {
+    private ZonedDateTime parseBegin(Element event) {
         String date, time;
-        if (element.select("table").size()>0)
+        if (event.select("table").size()>0)
         {
-            Elements table_label = element.select("table label");
+            Elements table_label = event.select("table label");
             date = table_label.get(0).text();
             time = table_label.get(1).text();
         }
         else {
-            date = element.select("label").get(1).text();
-            time = element.select("label").get(2).text();
+            date = event.select("label").get(1).text();
+            time = event.select("label").get(2).text();
         }
         return LocalDateTime.parse(date + " " + time, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")).atZone(ZoneId.of("Europe/Berlin"));
     }

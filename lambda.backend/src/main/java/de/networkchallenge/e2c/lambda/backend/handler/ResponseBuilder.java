@@ -42,7 +42,8 @@ public class ResponseBuilder {
                     responseEvents.add(new ResponseEvent().setEventTitle(event.getTitle())
                             .setEventBegin(event.getEventBeginGMT())
                             .setEventEnd(event.getEventEndGMT())
-                            .setEventSource(url.toString()));
+                            .setEventSource(url.toString())
+                            .setEventLocation(event.getLocation()));
                 }
                 response.setEvents(responseEvents);
                 response.setStatus(Response.Status.OK);

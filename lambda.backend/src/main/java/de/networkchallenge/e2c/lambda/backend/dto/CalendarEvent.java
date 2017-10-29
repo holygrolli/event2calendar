@@ -17,11 +17,13 @@ public class CalendarEvent {
 	private String title;
 	private ZonedDateTime eventBegin;
 	private ZonedDateTime eventEnd;
+	private String location;
 
-	public CalendarEvent(String title, ZonedDateTime eventBegin, ZonedDateTime eventEnd) {
+	public CalendarEvent(String title, ZonedDateTime eventBegin, ZonedDateTime eventEnd, String location) {
 		this.title = Objects.requireNonNull(title, "title must not be null");
 		this.eventBegin = Objects.requireNonNull(eventBegin, "eventBegin must not be null");
 		this.eventEnd = Objects.requireNonNull(eventEnd, "eventEnd must not be null");
+		this.location = location;
 	}
 
 	public String getTitle() {
@@ -52,5 +54,13 @@ public class CalendarEvent {
 
 	public void setEventEnd(ZonedDateTime eventEnd) {
 		this.eventEnd = eventEnd;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }
