@@ -45,6 +45,13 @@ Resources:
               Effect: Allow
               Action:
                 - s3:PutObject
+      Events:
+        ProxyEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Api
+            Path: /{proxy+}
+            Method: ANY
 
   ParseEventFromUrlFunctionPermission:
     Type: AWS::Lambda::Permission
