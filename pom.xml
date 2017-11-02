@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<modules>
-		<module>lambda.backend</module>
+		<module>lambda-modules</module>
 		<module>jsoup.html.downloader</module>
 	</modules>
 

@@ -30,7 +30,7 @@ Resources:
   ParseEventFromUrlFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ../lambda.backend/target/lambda.backend.jar
+      CodeUri: ../lambda-modules/lambda.backend/target/lambda.backend.jar
       Handler: de.networkchallenge.e2c.lambda.backend.MainHandler
       Runtime: java8
       MemorySize: 256
