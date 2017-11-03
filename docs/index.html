@@ -40,7 +40,7 @@
             <p>Füge einfach den nachfolgenden Link durch Ziehen in deine Lesezeichenleiste ein:</p>
             <p>
                 <a href="javascript: (function () { 
-    window.open('http://e2c.networkchallenge.de/index.html?url=' + encodeURIComponent(window.btoa(document.URL)),'addtocalendarevent');
+    window.open('http://e2c.networkchallenge.de/index.html?url=' + window.btoa(document.URL).replace(/\//gi, '_').replace(/\+/gi, '-'),'addtocalendarevent');
  }());" class="btn btn-success btn-lg" role="button">+AddToCalendar</a>
 
             </p>
