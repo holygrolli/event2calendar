@@ -1,31 +1,49 @@
 package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ServiceLoader;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Andreas
  *
  */
-@Service
 public class ParserRegistry {
 
-	@Autowired
-	private List<IEventParser> parsers;
+	private static ParserRegistry instance = null;
+	private static Object mutex = new Object();
 
-	private final static Map<String, IEventParser> urlMapping = new HashMap<String, IEventParser>();
+	private static ServiceLoader<IEventParser> parsers = null;
+	private static final Map<String, IEventParser> urlMapping = new HashMap<String, IEventParser>();
+	private static final AtomicInteger size = new AtomicInteger(0);
 
-	@PostConstruct
-	public void init() {
-		parsers.forEach(parser -> parser.getBaseUris() //
-				.forEach(url -> urlMapping.put(url, parser)));
+	private ParserRegistry(){}
+
+	public static ParserRegistry getInstance() {
+		if (instance == null)
+		{
+			synchronized (mutex){
+				if (instance == null){
+					instance = new ParserRegistry();
+					init();
+				}
+			}
+		}
+		return instance;
+	}
+
+	private static void init() {
+		parsers = ServiceLoader.load(IEventParser.class);
+		size.set(0);
+		parsers.forEach(parser -> {
+			size.addAndGet(1);
+			parser.getBaseUris() //
+					.forEach(url -> urlMapping.put(url, parser));
+		});
 	}
 
 	public Optional<IEventParser> getParserForUrl(String url) {
@@ -33,6 +51,6 @@ public class ParserRegistry {
 	}
 
 	public int getRegisteredCount() {
-		return parsers.size();
+		return size.get();
 	}
 }

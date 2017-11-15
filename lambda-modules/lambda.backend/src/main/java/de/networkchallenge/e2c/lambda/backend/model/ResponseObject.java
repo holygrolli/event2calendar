@@ -2,7 +2,7 @@ package de.networkchallenge.e2c.lambda.backend.model;
 
 import java.util.List;
 
-public class Response {
+public class ResponseObject {
 
     public void setEvents(List<ResponseEvent> events) {
         this.events = events;
@@ -24,7 +24,7 @@ public class Response {
         return status;
     }
 
-    public Response setStatus(final Status status) {
+    public ResponseObject setStatus(final Status status) {
         this.status = status;
         return this;
     }

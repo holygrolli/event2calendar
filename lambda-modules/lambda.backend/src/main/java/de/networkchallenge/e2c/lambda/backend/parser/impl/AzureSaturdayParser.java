@@ -5,7 +5,6 @@ import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -16,7 +15,6 @@ import java.util.Locale;
  * @author Andreas
  *
  */
-@Component
 public class AzureSaturdayParser implements IEventParser {
 
 	private final static TimeParser TP = new TimeParser("MMMM d, uuuu HH:mm xxx", Locale.US);

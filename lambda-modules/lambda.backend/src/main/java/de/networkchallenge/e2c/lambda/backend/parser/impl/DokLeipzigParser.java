@@ -6,7 +6,6 @@ import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -17,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-@Component
 public class DokLeipzigParser implements IEventParser {
     private final static TimeParser TP = new TimeParser("dd.MM.yyyy HH:mm", Locale.GERMANY);
 

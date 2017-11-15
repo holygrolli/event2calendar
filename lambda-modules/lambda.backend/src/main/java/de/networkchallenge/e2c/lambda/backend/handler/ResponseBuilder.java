@@ -1,8 +1,8 @@
 package de.networkchallenge.e2c.lambda.backend.handler;
 
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
-import de.networkchallenge.e2c.lambda.backend.model.Response;
 import de.networkchallenge.e2c.lambda.backend.model.ResponseEvent;
+import de.networkchallenge.e2c.lambda.backend.model.ResponseObject;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.ParserRegistry;
 import org.jsoup.Jsoup;
@@ -27,9 +27,9 @@ public class ResponseBuilder {
         this.url = Objects.requireNonNull(url);
     }
 
-    public Response build()
+    public ResponseObject build()
     {
-        final Response response = new Response();
+        final ResponseObject responseObject = new ResponseObject();
         Optional<IEventParser> parser = registry.getParserForUrl(url.getHost());
         if (parser.isPresent())
         {
@@ -45,16 +45,16 @@ public class ResponseBuilder {
                             .setEventSource(url.toString())
                             .setEventLocation(event.getLocation()));
                 }
-                response.setEvents(responseEvents);
-                response.setStatus(Response.Status.OK);
+                responseObject.setEvents(responseEvents);
+                responseObject.setStatus(ResponseObject.Status.OK);
             } catch (IOException e) {
-                response.setStatus(Response.Status.ERROR_LOADING);
+                responseObject.setStatus(ResponseObject.Status.ERROR_LOADING);
             }
         }
         else {
-            response.setStatus(Response.Status.URL_NOT_SUPPORTED);
+            responseObject.setStatus(ResponseObject.Status.URL_NOT_SUPPORTED);
         }
-        return response;
+        return responseObject;
     }
 
     private Document getDocFromUrl(URL url) throws IOException {

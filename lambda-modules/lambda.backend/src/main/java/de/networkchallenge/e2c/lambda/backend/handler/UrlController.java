@@ -1,49 +1,50 @@
 package de.networkchallenge.e2c.lambda.backend.handler;
 
-import de.networkchallenge.e2c.lambda.backend.model.Response;
+import com.google.gson.Gson;
+import de.networkchallenge.e2c.lambda.backend.model.ResponseObject;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.ParserRegistry;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.util.B64UrlDecoder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import spark.Request;
+import spark.Response;
 
 import java.net.URL;
 
-@RestController
-@EnableWebMvc
-@CrossOrigin
+import static spark.Spark.get;
+
 public class UrlController {
 
-	@Autowired
-	private ParserRegistry parserRegistry;
 
-	@RequestMapping("/url/{url}")
-	@ResponseBody
-	public Response parse(@PathVariable String url)
-	{
-		Response response = new Response();
-		try {
-			URL eventUrl = new URL(B64UrlDecoder.parse(url).orElseThrow(() -> new IllegalArgumentException(url)));
-			response = new ResponseBuilder(parserRegistry, eventUrl).build();
-		} catch (Exception e) {
-			System.err.println("invalid URL: " + url);
-			response.setStatus(Response.Status.URL_INVALID);
-		}
-		return response;
+	public UrlController() {
+		Gson gson = new Gson();
+		get("/url/:url", UrlController::parse, gson::toJson);
+		get("/parse", UrlController::parse, gson::toJson);
 	}
 
-	@RequestMapping("/parse")
-	@ResponseBody
-	public Response parseRequestMapping(@RequestParam("url") String url)
+	public static ResponseObject parse(Request request, Response response)
 	{
-		Response response = new Response();
+		ResponseObject responseObject = new ResponseObject();
+		String url = request.params(":url");
 		try {
 			URL eventUrl = new URL(B64UrlDecoder.parse(url).orElseThrow(() -> new IllegalArgumentException(url)));
-			response = new ResponseBuilder(parserRegistry, eventUrl).build();
+			responseObject = new ResponseBuilder(ParserRegistry.getInstance(), eventUrl).build();
 		} catch (Exception e) {
 			System.err.println("invalid URL: " + url);
-			response.setStatus(Response.Status.URL_INVALID);
+			responseObject.setStatus(ResponseObject.Status.URL_INVALID);
 		}
-		return response;
+		return responseObject;
+	}
+
+	public static ResponseObject parseRequestMapping(Request request, Response response)
+	{
+		ResponseObject responseObject = new ResponseObject();
+		String url = request.queryParams("url");
+		try {
+			URL eventUrl = new URL(B64UrlDecoder.parse(url).orElseThrow(() -> new IllegalArgumentException(url)));
+			responseObject = new ResponseBuilder(ParserRegistry.getInstance(), eventUrl).build();
+		} catch (Exception e) {
+			System.err.println("invalid URL: " + url);
+			responseObject.setStatus(ResponseObject.Status.URL_INVALID);
+		}
+		return responseObject;
 	}
 }

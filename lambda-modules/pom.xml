@@ -2,14 +2,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
-		<relativePath />
+		<groupId>de.networkchallenge.e2c</groupId>
+		<artifactId>event2calendar.modules</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>de.networkchallenge.e2c</groupId>
-	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>lambda-modules</artifactId>
 	<packaging>pom</packaging>
 
@@ -23,6 +21,5 @@
 
 	<modules>
 		<module>lambda.backend</module>
-		<module>spring-starter</module>
 	</modules>
 </project>

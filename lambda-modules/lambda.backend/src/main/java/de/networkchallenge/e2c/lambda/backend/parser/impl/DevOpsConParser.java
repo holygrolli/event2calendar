@@ -4,7 +4,6 @@ import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +15,6 @@ import java.util.Locale;
  * @author Andreas
  *
  */
-@Component
 public class DevOpsConParser implements IEventParser {
 
 	public DevOpsConParser() {
