@@ -4,6 +4,7 @@ import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Parser for jax.de<br>
+ *     Dates are provided like this <pre>
+ *     <span class="ws-label" style="font-weight: 600;">Freitag, 27. April 2018<br><span style="font-weight: 400;">09:00 - 17:00</span></span>
+ *     </pre>
+ */
+@Component
 public class JaxParser implements IEventParser {
     @Override
     public List<String> getBaseUris() {
