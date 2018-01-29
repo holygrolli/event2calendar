@@ -1,0 +1,1456 @@
+<!doctype html>
+<!--[if IE 7]><html class="ie ie7 ltie8 ltie9" lang="de-DE" prefix="og: http://ogp.me/ns#"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 ltie9" lang="de-DE" prefix="og: http://ogp.me/ns#"><![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="de-DE" prefix="og: http://ogp.me/ns#">
+ <!--<![endif]-->
+ <head>
+  <link rel="stylesheet" type="text/css" href="https://jax.de/wp-content/cache/minify/a6476.default.include.a25d90.css?x34188" media="all"> 
+  <script type="text/javascript" src="https://jax.de/wp-content/cache/minify/a6476.default.include.8f3397.js?x34188"></script> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="viewport" content="initial-scale=1.0"> 
+  <title>Architektur Retreat Workshop - JAX</title> 
+  <link rel="pingback" href="https://jax.de/xmlrpc.php"> 
+  <!-- This site is optimized with the Yoast SEO plugin v4.6 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Architektur ist eher ein trockenes, theoretisches Thema. Nicht bei diesem Workshop! Wir werden ganz praktisch Architekturen entwerfen, kommunizieren und verbessern. So lernen wir, worauf es wirklich ankommt. In mehreren Iterationen lernen wir Konzepte kennen, mit denen die Qualität eines Softwareprojekts verbessert werden kann."> 
+  <meta name="robots" content="noodp"> 
+  <meta name="keywords" content="Software Architecture"> 
+  <link rel="canonical" href="https://jax.de/software-architecture/architektur-retreat-workshop/"> 
+  <meta property="og:locale" content="de_DE"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="Architektur Retreat Workshop - JAX"> 
+  <meta property="og:description" content="Architektur ist eher ein trockenes, theoretisches Thema. Nicht bei diesem Workshop! Wir werden ganz praktisch Architekturen entwerfen, kommunizieren und verbessern. So lernen wir, worauf es wirklich ankommt. In mehreren Iterationen lernen wir Konzepte kennen, mit denen die Qualität eines Softwareprojekts verbessert werden kann."> 
+  <meta property="og:url" content="https://jax.de/software-architecture/architektur-retreat-workshop/"> 
+  <meta property="og:site_name" content="JAX"> 
+  <meta property="article:publisher" content="https://www.facebook.com/JaxKonferenz/"> 
+  <meta property="og:image" content="https://jax.de/wp-content/uploads/2017/11/JAX_2018_TW_1200x675_43834_v1.png"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="Architektur ist eher ein trockenes, theoretisches Thema. Nicht bei diesem Workshop! Wir werden ganz praktisch Architekturen entwerfen, kommunizieren und verbessern. So lernen wir, worauf es wirklich ankommt. In mehreren Iterationen lernen wir Konzepte kennen, mit denen die Qualität eines Softwareprojekts verbessert werden kann."> 
+  <meta name="twitter:title" content="Architektur Retreat Workshop - JAX"> 
+  <meta name="twitter:site" content="@jaxcon"> 
+  <meta name="twitter:image" content="https://jax.de/wp-content/uploads/2017/11/JAX_2018_TW_1200x675_43834_v1.png"> 
+  <meta name="twitter:creator" content="@jaxcon"> 
+  <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.google.com"> 
+  <link rel="dns-prefetch" href="//maps.google.com"> 
+  <link rel="dns-prefetch" href="//netdna.bootstrapcdn.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="JAX » Feed" href="https://jax.de/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="JAX » Kommentar-Feed" href="https://jax.de/comments/feed/"> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/jax.de\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.8.3"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b!==c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="cf7cf-style-css" href="https://jax.de/wp-content/plugins/cf7-conditional-fields/style.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="sands_advanced_tickets_display_css-css" href="https://jax.de/wp-content/plugins/sands_advanced_tickets_display/assets/css/sands_advanced_tickets_display.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jqbxslidercss-css" href="https://jax.de/wp-content/plugins/sands_advanced_tickets_display/assets/libs/jquery.bxslider/jquery.bxslider.min.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" type="text/css" media="screen"> 
+  <link rel="stylesheet" id="sands-subscription-evalanche-css-css" href="https://jax.de/wp-content/plugins/subscription-integration-nl-registration/include/style.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="style-css" href="https://jax.de/wp-content/themes/sands-events-subtheme/style.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="Montserrat-google-font-css" href="https://fonts.googleapis.com/css?family=Montserrat%3Aregular%2C700&amp;subset=latin&amp;ver=4.8.3" type="text/css" media="all"> 
+  <link rel="stylesheet" id="superfish-css" href="https://jax.de/wp-content/themes/thekeynote-v1-00/plugins/superfish/css/superfish.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="dlmenu-css" href="https://jax.de/wp-content/themes/thekeynote-v1-00/plugins/dl-menu/component.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="style-responsive-css" href="https://jax.de/wp-content/themes/thekeynote-v1-00/stylesheet/style-responsive.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="style-custom-css" href="https://jax.de/wp-content/themes/thekeynote-v1-00/stylesheet/style-custom.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wpgmp-frontend-css" href="https://jax.de/wp-content/plugins/wp-google-map-plugin//assets/css/frontend.css?x34188" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jquery-ui-smoothness-css" href="https://jax.de/wp-content/plugins/contact-form-7/includes/js/jquery-ui/themes/smoothness/jquery-ui.min.css?x34188" type="text/css" media="screen"> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/jquery-migrate.min.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/sands_multi_lang_cf7/assets/js/sands_multi_lang_cf7.js?x34188"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var scroll_parameters = {"snlscollpoint":"900"};
+/* ]]> */
+</script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var google_captcha_data = {"public_google_key":"6Le7KhsTAAAAAIUTX-rTVHWjHtCuKgCAtgBoOs4B"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/subscription-integration-nl-registration/include/script.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/wbounce/frontend/js/min/wbounce.min.js?x34188"></script> 
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCickEb19-foUuLJEZxMDN06WzrSJPaqM0&amp;libraries=geometry%2Cplaces%2Cweather%2Cpanoramio%2Cdrawing&amp;language=de&amp;ver=4.8.3"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var wpgmp_local = {"language":"de","urlforajax":"https:\/\/jax.de\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/wp-google-map-plugin//assets/js/maps.js?x34188"></script> 
+  <link rel="https://api.w.org/" href="https://jax.de/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jax.de/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://jax.de/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 4.8.3"> 
+  <link rel="shortlink" href="https://jax.de/?p=61423"> 
+  <link rel="alternate" type="application/json+oembed" href="https://jax.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjax.de%2Fsoftware-architecture%2Farchitektur-retreat-workshop%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://jax.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjax.de%2Fsoftware-architecture%2Farchitektur-retreat-workshop%2F&amp;format=xml"> 
+  <link rel="https://github.com/WP-API/WP-API" href="https://jax.de/wp-json"> 
+  <style>
+.scroll-back-to-top-wrapper {
+    position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	text-align: center;
+	z-index: 99999999;
+    background-color: #777777;
+	color: #eeeeee;
+	width: 50px;
+	height: 48px;
+	line-height: 48px;
+	right: 30px;
+	bottom: 90px;
+	padding-top: 2px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.scroll-back-to-top-wrapper:hover {
+	background-color: #888888;
+  color: #eeeeee;
+}
+.scroll-back-to-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-back-to-top-wrapper i.fa {
+	line-height: inherit;
+}
+.scroll-back-to-top-wrapper .fa-lg {
+	vertical-align: 0;
+}
+</style> 
+  <script type="text/javascript">
+  var allowSubmit = true;    
+  </script>
+  <style type="text/css">.wbounce-modal .underlay {
+	background-color: #00569d;
+}
+.wbounce-modal form input[type=submit]{  margin-bottom: 0px; background-color: #00569d;}
+
+#wbounce-modal-sub {
+   border-color: #fff;
+    border-style: solid;
+    border-width: 7px;
+}</style>
+  <link rel="stylesheet" type="text/css" media="all" href="https://jax.de/wp-content/themes/sands-events-subtheme/css/bootstrap.min.css?x34188">
+  <link rel="stylesheet" type="text/css" media="all" href="https://jax.de/wp-content/themes/sands-events-subtheme/js/bootstrap-select/dist/css/bootstrap-select.min.css?x34188">
+  <script type="text/javascript" src="https://jax.de/wp-content/themes/sands-events-subtheme/sands-functions.js?x34188"> </script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/themes/sands-events-subtheme/js/bootstrap.min.js?x34188"> </script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/themes/sands-events-subtheme/js/bootstrap-select/dist/js/bootstrap-select.js?x34188"> </script> 
+  <link rel="shortcut icon" href="https://jax.de/wp-content/uploads/2015/11/JAX_2016_Favicon_16x16.png" type="image/x-icon">
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  ga('create', 'UA-18197080-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  <!-- load the script for older ie version --> 
+  <!--[if lt IE 9]>
+<script src="https://jax.de/wp-content/themes/thekeynote-v1-00/javascript/html5.js?x34188" type="text/javascript"></script>
+<script src="https://jax.de/wp-content/themes/thekeynote-v1-00/plugins/easy-pie-chart/excanvas.js?x34188" type="text/javascript"></script>
+<![endif]--> 
+  <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style> 
+  <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent --> 
+  <script type="text/javascript">
+    window.cookieconsent_options = {"message":"Diese Webseite verwendet Cookies von Drittanbietern, um Dienste bereitzustellen, Anzeigen zu personalisieren und Zugriffe zu analysieren. Informationen darüber, wie Sie die Website verwenden, werden an diese Drittanbieter weitergegeben. ","dismiss":"Verstanden","learnMore":"Mehr Infos","link":"https://jax.de/Datenschutz/","theme":"dark-bottom"};
+</script> 
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script> 
+  <!-- End Cookie Consent plugin --> 
+  <script type="application/ld+json">
+  {
+    "name": "W-JAX",
+    "location": {
+        "name": "Rheingoldhalle Mainz",
+        "url": "https://www.mainz-congress.com/locations/rheingoldhalle/",
+        "address": {
+            "addressCountry": "Germany",
+            "addressLocality": "Mainz",
+            "streetAddress": "Rheinstra\u00dfe 66",
+            "postalCode": "55116",
+            "@type": "PostalAddress"
+        },
+        "@type": "Place"
+    },
+    "startDate": "2018-04-23T08:00",
+    "endDate": "2018-04-27T18:00",
+    "doorTime": "07:30",
+    "url": "http://jax.de/",
+    "description": "Die Konferenz f\u00fcr Java, Architektur- und Softwareinnovation.",
+    "inLanguage": "de",
+    "image": "/wp-content/uploads/2016/04/WJAX_Webseite_Titelbild_Logo_Navi_35233_v2.png",
+    "@context": "http://schema.org",
+    "@type": "Event",
+    "offers": [
+        {
+            "itemOffered": "3-TAGES-PASS",
+            "Description": "W-JAX Konferenz",
+            "price": "1299",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-09-09T11:37:00Z",
+            "validThrough": "2017-12-21T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "2-TAGES-PASS",
+            "Description": "W-JAX Konferenz",
+            "price": "979",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-09-09T11:37:00Z",
+            "validThrough": "2017-12-21T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "HAUPTKONFERENZ (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "709",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-09-09T11:37:00Z",
+            "validThrough": "2017-12-21T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "POWER WORKSHOPS (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "505",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-09-09T11:37:00Z",
+            "validThrough": "2017-12-21T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "3-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "1299",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-12-22T00:00:01Z",
+            "validThrough": "2018-02-08T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "2-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "979",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-12-22T00:00:01Z",
+            "validThrough": "2018-02-08T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "HAUPTKONFERENZ (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "709",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-12-22T00:00:01Z",
+            "validThrough": "2018-02-08T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "POWER WORKSHOPS (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "505",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2017-12-22T00:00:01Z",
+            "validThrough": "2018-02-08T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "5-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "2380",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-02-09T00:00:01Z",
+            "validThrough": "2018-03-22T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "3-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "1350",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-02-09T00:00:01Z",
+            "validThrough": "2018-03-22T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "2-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "1030",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-02-09T00:00:01Z",
+            "validThrough": "2018-03-22T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "HAUPTKONFERENZ (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "709",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-02-09T00:00:01Z",
+            "validThrough": "2018-03-22T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "POWER WORKSHOPS (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "505",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-02-09T00:00:01Z",
+            "validThrough": "2018-03-22T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "5-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "2580",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-03-23T00:00:01Z",
+            "validThrough": "2018-04-26T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "3-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "1450",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-03-23T00:00:01Z",
+            "validThrough": "2018-04-26T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "2-Tages-Pass",
+            "Description": "W-JAX Konferenz",
+            "price": "1130",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-03-23T00:00:01Z",
+            "validThrough": "2018-04-26T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "HAUPTKONFERENZ (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "809",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-03-23T00:00:01Z",
+            "validThrough": "2018-04-26T23:59:59Z",
+            "@type": "Offer"
+        },
+        {
+            "itemOffered": "POWER WORKSHOPS (1 TAG)",
+            "Description": "W-JAX Konferenz",
+            "price": "605",
+            "priceCurrency": "eur",
+            "url": "http://jax.de/",
+            "availability": "http://schema.org/PreOrder",
+            "validFrom": "2018-03-23T00:00:01Z",
+            "validThrough": "2018-04-26T23:59:59Z",
+            "@type": "Offer"
+        }
+    ],
+    "performer": [
+        {
+            "name": "Eberhard Wolff",
+            "@type": "Person"
+        },
+        {
+            "name": "Lars R\u00f6wekamp",
+            "@type": "Person"
+        },
+        {
+            "name": "Kai T\u00f6dter",
+            "@type": "Person"
+        },
+        {
+            "name": "Michael Johann",
+            "@type": "Person"
+        },
+        {
+            "name": "Arno Haase",
+            "@type": "Person"
+        },
+        {
+            "name": "Bernhard L\u00f6wenstein",
+            "@type": "Person"
+        },
+        {
+            "name": "Angelika Langer",
+            "@type": "Person"
+        },
+        {
+            "name": "Carola Lilienthal",
+            "@type": "Person"
+        }
+    ]
+}  </script> 
+ </head> 
+ <body class="session-template-default single single-session postid-61423">
+  <script type="text/javascript" src="https://jax.de/wp-content/cache/minify/a6476.default.include-body.a95bed.js?x34188"></script> 
+  <div class="body-wrapper  float-menu" data-home="https://jax.de"> 
+   <header class="gdlr-header-wrapper"> 
+    <!-- top navigation --> 
+    <!-- logo --> 
+    <div class="gdlr-header-inner"> 
+     <div class="gdlr-header-container container"> 
+      <!-- logo --> 
+      <div class="gdlr-logo"> 
+       <a href="https://jax.de" class="mob_hide_logo"> <img src="https://jax.de/wp-content/uploads/2017/11/Logo_JAX_43197_180x90_v1.png" alt="" width="180" height="90"> </a> 
+       <div class="gdlr-responsive-navigation dl-menuwrapper" id="gdlr-responsive-navigation">
+        <button class="dl-trigger">Open Menu</button>
+        <ul id="menu-main-menu-jax" class="dl-menu gdlr-main-mobile-menu">
+         <li id="menu-item-45594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-45594"><a href="https://jax.de/programm/">Programm</a> 
+          <ul class="dl-submenu"> 
+           <li id="menu-item-61061" class="hidden-lg menu-item menu-item-type-post_type menu-item-object-page menu-item-61061"><a href="https://jax.de/programm/">Zeitplaner</a></li> 
+           <li id="menu-item-45564" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45564"><a href="/microservices/">Microservices</a></li> 
+           <li id="menu-item-45561" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45561"><a href="/core-java-jvm-languages/">Core Java &amp; JVM Languages</a></li> 
+           <li id="menu-item-45566" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45566"><a href="/software-architecture/">Software Architecture</a></li> 
+           <li id="menu-item-45563" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45563"><a href="/web-development-javascript/">Web Development &amp; JavaScript</a></li> 
+           <li id="menu-item-45562" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45562"><a href="/serverside-enterprise-java/">Serverside &amp; Enterprise Java</a></li> 
+           <li id="menu-item-45567" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45567"><a href="/agile-culture/">Agile &amp; Culture</a></li> 
+           <li id="menu-item-45568" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45568"><a href="/big-data-machine-learning/">Big Data &amp; Machine Learning</a></li> 
+           <li id="menu-item-45565" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45565"><a href="/cloud-container-serverless/">Clouds, Container &amp; Serverless</a></li> 
+           <li id="menu-item-45569" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45569"><a href="/devops-continuous-delivery/">DevOps &amp; Continuous Delivery</a></li> 
+           <li id="menu-item-45572" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45572"><a href="/digital-transformation-innovation/">Digital Innovation &amp; Transformation</a></li> 
+           <li id="menu-item-45570" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45570"><a href="/performance-security/">Performance &amp; Security</a></li> 
+           <li id="menu-item-48536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48536"><a href="https://jax.de/agile-day/">Agile Day</a></li> 
+           <li id="menu-item-6946" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6946"><a href="https://jax.de/programm/">Mehr Programm</a> 
+            <ul class="dl-submenu"> 
+             <li id="menu-item-47681" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47681"><a href="https://jax.de/sessions/">Sessions</a></li> 
+             <li id="menu-item-6947" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6947"><a href="https://jax.de/speakers/">Speaker</a></li> 
+             <li id="menu-item-47680" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47680"><a href="https://jax.de/power-workshops/">Power Workshops</a></li> 
+             <li id="menu-item-47682" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47682"><a href="https://jax.de/keynote/">Keynotes</a></li> 
+             <li id="menu-item-46228" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46228"><a href="https://jax.de/special-days/">Special Days</a></li> 
+             <li id="menu-item-47683" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47683"><a href="https://jax.de/labs/">Labs</a></li> 
+             <li id="menu-item-47908" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47908"><a href="https://jax.de/programm/">Komplettes Programm</a></li> 
+             <li id="menu-item-34131" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34131"><a href="https://jax.de/archiv/">Archiv</a> 
+              <ul class="dl-submenu"> 
+               <li id="menu-item-48307" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48307"><a href="https://jax.de/archiv/jax-2017/">Archiv Jax 2017</a></li> 
+               <li id="menu-item-45198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45198"><a href="https://jax.de/archiv-wjax-2016/">Archiv WJAX 2016</a></li> 
+              </ul> </li> 
+            </ul> </li> 
+          </ul> </li> 
+         <li id="menu-item-46270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46270"><a href="https://jax.de/tickets/">Tickets</a></li> 
+         <li id="menu-item-35677" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-35677"><a href="https://jax.de/blog/">Blog</a></li> 
+         <li id="menu-item-46855" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46855"><a href="https://jax.de/dossier-java-trends-insights/">Java Dossier</a></li> 
+         <li id="menu-item-5273" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5273"><a href="https://jax.de/sponsor-werden/">Sponsoring &amp; Expo</a> 
+          <ul class="dl-submenu"> 
+           <li id="menu-item-48423" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48423"><a href="https://jax.de/sponsor-werden/">Sponsor werden</a></li> 
+           <li id="menu-item-61617" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61617"><a href="https://jax.de/sponsoren-aussteller/">Sponsoren &amp; Aussteller</a></li> 
+          </ul> </li> 
+         <li id="menu-item-5275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5275"><a href="https://jax.de/kontakt/">Service</a> 
+          <ul class="dl-submenu"> 
+           <li id="menu-item-5276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5276"><a href="https://jax.de/kontakt/">Kontakt</a></li> 
+           <li id="menu-item-46841" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46841"><a href="https://jax.de/location/">Location</a></li> 
+           <li id="menu-item-47074" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47074"><a href="https://jax.de/hotelbuchung/">Hotelbuchung</a></li> 
+           <li id="menu-item-5285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5285"><a href="https://jax.de/presse/">Presse</a></li> 
+           <li id="menu-item-4137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4137"><a href="https://jax.de/veranstalter/">Veranstalter</a></li> 
+           <li id="menu-item-4586" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4586"><a href="https://jax.de/code-of-conduct/">Code of Conduct</a></li> 
+           <li id="menu-item-5284" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5284"><a href="https://jax.de/newsletter/">Newsletter</a></li> 
+           <li id="menu-item-37530" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37530"><a href="https://jax.de/mobile-app/">Mobile App</a></li> 
+          </ul> </li> 
+         <li id="menu-item-46271" class="register-button menu-item menu-item-type-post_type menu-item-object-page menu-item-46271"><a href="https://jax.de/tickets/">Jetzt anmelden</a></li> 
+        </ul>
+       </div> 
+      </div> 
+      <!-- navigation --> 
+      <div class="gdlr-navigation-wrapper">
+       <nav class="gdlr-navigation" id="gdlr-main-navigation" role="navigation">
+        <ul id="menu-main-menu-jax-1" class="sf-menu gdlr-main-menu">
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-45594menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-45594 gdlr-normal-menu"><a href="https://jax.de/programm/">Programm</a> 
+          <ul class="sub-menu"> 
+           <li class="hidden-lg menu-item menu-item-type-post_type menu-item-object-page menu-item-61061"><a href="https://jax.de/programm/">Zeitplaner</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45564"><a href="/microservices/">Microservices</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45561"><a href="/core-java-jvm-languages/">Core Java &amp; JVM Languages</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45566"><a href="/software-architecture/">Software Architecture</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45563"><a href="/web-development-javascript/">Web Development &amp; JavaScript</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45562"><a href="/serverside-enterprise-java/">Serverside &amp; Enterprise Java</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45567"><a href="/agile-culture/">Agile &amp; Culture</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45568"><a href="/big-data-machine-learning/">Big Data &amp; Machine Learning</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45565"><a href="/cloud-container-serverless/">Clouds, Container &amp; Serverless</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45569"><a href="/devops-continuous-delivery/">DevOps &amp; Continuous Delivery</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45572"><a href="/digital-transformation-innovation/">Digital Innovation &amp; Transformation</a></li> 
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45570"><a href="/performance-security/">Performance &amp; Security</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48536"><a href="https://jax.de/agile-day/">Agile Day</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6946"><a href="https://jax.de/programm/">Mehr Programm</a> 
+            <ul class="sub-menu"> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47681"><a href="https://jax.de/sessions/">Sessions</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6947"><a href="https://jax.de/speakers/">Speaker</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47680"><a href="https://jax.de/power-workshops/">Power Workshops</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47682"><a href="https://jax.de/keynote/">Keynotes</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46228"><a href="https://jax.de/special-days/">Special Days</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47683"><a href="https://jax.de/labs/">Labs</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47908"><a href="https://jax.de/programm/">Komplettes Programm</a></li> 
+             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34131"><a href="https://jax.de/archiv/">Archiv</a> 
+              <ul class="sub-menu"> 
+               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48307"><a href="https://jax.de/archiv/jax-2017/">Archiv Jax 2017</a></li> 
+               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45198"><a href="https://jax.de/archiv-wjax-2016/">Archiv WJAX 2016</a></li> 
+              </ul> </li> 
+            </ul> </li> 
+          </ul> </li> 
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46270menu-item menu-item-type-post_type menu-item-object-page menu-item-46270 gdlr-normal-menu"><a href="https://jax.de/tickets/">Tickets</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-35677menu-item menu-item-type-taxonomy menu-item-object-category menu-item-35677 gdlr-normal-menu"><a href="https://jax.de/blog/">Blog</a></li> 
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46855menu-item menu-item-type-post_type menu-item-object-page menu-item-46855 gdlr-normal-menu"><a href="https://jax.de/dossier-java-trends-insights/">Java Dossier</a></li> 
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5273menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5273 gdlr-normal-menu"><a href="https://jax.de/sponsor-werden/">Sponsoring &amp; Expo</a> 
+          <ul class="sub-menu"> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48423"><a href="https://jax.de/sponsor-werden/">Sponsor werden</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61617"><a href="https://jax.de/sponsoren-aussteller/">Sponsoren &amp; Aussteller</a></li> 
+          </ul> </li> 
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5275menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5275 gdlr-normal-menu"><a href="https://jax.de/kontakt/">Service</a> 
+          <ul class="sub-menu"> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5276"><a href="https://jax.de/kontakt/">Kontakt</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46841"><a href="https://jax.de/location/">Location</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47074"><a href="https://jax.de/hotelbuchung/">Hotelbuchung</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5285"><a href="https://jax.de/presse/">Presse</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4137"><a href="https://jax.de/veranstalter/">Veranstalter</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4586"><a href="https://jax.de/code-of-conduct/">Code of Conduct</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5284"><a href="https://jax.de/newsletter/">Newsletter</a></li> 
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37530"><a href="https://jax.de/mobile-app/">Mobile App</a></li> 
+          </ul> </li> 
+         <li class="register-button menu-item menu-item-type-post_type menu-item-object-page menu-item-46271register-button menu-item menu-item-type-post_type menu-item-object-page menu-item-46271 gdlr-normal-menu"><a href="https://jax.de/tickets/">Jetzt anmelden</a></li> 
+        </ul>
+       </nav> 
+       <div class="clear"></div> 
+      </div> 
+     </div> 
+     <div class="clear"></div> 
+    </div>
+   </header> 
+   <div id="gdlr-header-substitute"></div> 
+   <div class="header-special-graphic container">
+    <div class="header-special-graphic-inside">
+     <a href="/tickets/"><img src="/wp-content/uploads/2017/12/JAX_2018_Stoerer_Website_175x175_44305_v2.png"></a>
+    </div>
+   </div> 
+   <div class="gdlr-page-title-wrapper gdlr-parallax-wrapper gdlr-title-normal" data-bgspeed="0.5"> 
+    <div class="gdlr-page-title-overlay"></div> 
+    <div class="gdlr-page-title-container container"> 
+     <h2 class="gdlr-page-caption">JAX | 23. - 27. April 2018, Mainz</h2>
+     <h2 class="gdlr-page-title sands-gdlr-page-title">Architektur Retreat Workshop</h2>
+     <div class="session-type">
+      Workshop
+     </div>
+     <div class="tagcontainer">
+      <a class="tagcontaineritem ijsstyle classicstyle" href="https://jax.de/software-architecture">#Software Architecture</a>
+     </div> 
+    </div> 
+   </div> 
+   <!-- is search --> 
+   <div class="content-wrapper"> 
+    <div class="gdlr-content"> 
+     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.4.1/jquery-migrate.min.js"></script> 
+     <link rel="stylesheet" type="text/css" href="/wp-content/themes/sands-events-subtheme/session-v2-style.css?x34188"> 
+     <style>
+    	.classicstyle
+    	{
+    		color: #FFFFFF !important;
+    		background-color: #337AB7 !important;
+    	}
+    	.classicstyle:hover
+    	{
+    		color: #FFFFFF !important;
+    		background-color: #24547E !important;
+    	}
+    	.session-type {
+		    color: #ffffff;
+		}
+
+    	a.tagcontaineritem.ijsstyle.classicstyle	{
+			color: #FFFFFF !important;
+    	}
+    	a.tagcontaineritem.ijsstyle.classicstyle:hover    	{
+    		color: #FFFFFF !important;
+    	}
+    	</style> 
+     <style>
+    	.plusminus
+    	{
+    		color: #FFFFFF !important;
+    		background-color: #24547E !important;
+    	}
+    	.plusminus:hover
+    	{
+    		color: #FFFFFF !important;
+    		background-color: #337AB7 !important;
+    	}
+    	</style> 
+     <script>
+$(document).ready(function() {
+
+	var newdisturber = $('.header-special-graphic-inside').clone().addClass('disturberstyle');
+	newdisturber.removeClass('header-special-graphic-inside');
+	$( ".content-wrapper" ).prepend( newdisturber );
+	
+	if ( $( "#lastaccordion" ).length ) {
+		$( "#lastaccordion" ).css("border-bottom","0px solid #e6e6e6");
+	}
+	$( "#collapseThree" ).css("position","inherit");
+	$( ".conentinsideaccordion" ).insertAfter( $(".lastaccordion") );
+    if ($('.accordion-tab').length) {
+        $('.accordion-tab:not(.active)').addClass('pre-deactive');
+    }
+
+});
+
+
+$(document).on('click', '.accordion-title.ijsstyle.classicstyle', function() {
+if ($(this).parent().hasClass('active')) {
+	$(this).parent().addClass('pre-deactive');
+}
+else{
+	$(this).parent().removeClass('pre-deactive');
+}
+
+});
+
+$(document).on('click', '.lastaccordion.sessions-accordion-item-collapsed', function() {
+	$( ".conentinsideaccordion" ).insertAfter( $(".lastaccordion") );
+	$( "#lastaccordion" ).css("border-bottom","0px solid #e6e6e6");
+});
+
+$(document).on('click', '.lastaccordion.sessions-accordion-item-not-collapsed', function() {
+	$( "#lastaccordion" ).css("border-bottom","1px solid #e6e6e6");
+	$( ".lastaccordion .card #collapseThree .card-block" ).prepend( $( ".conentinsideaccordion" ) );
+	$( ".lastaccordion .card #collapseThree .card-block" ).prepend( $( ".conentinsideaccordion" ) );
+});
+
+$(document).on('click', '.sessions-accordion-item-collapsed .card-header', function() {
+    $(this).closest( '.sessions-accordion-item-collapsed.topcard' ).removeClass('sessions-accordion-item-collapsed').addClass('sessions-accordion-item-not-collapsed');
+    $(this).removeClass('sessions-accordion-item-collapsed');
+    $(this).addClass('sessions-accordion-item-not-collapsed');
+    $(this).find(".mb-0").removeClass("downarrow").addClass("uparrow");
+});
+
+$(document).on('click', '.sessions-accordion-item-not-collapsed .card-header', function() {
+    $(this).closest( '.sessions-accordion-item-not-collapsed.topcard' ).addClass('sessions-accordion-item-collapsed').removeClass('sessions-accordion-item-not-collapsed'); 
+    $(this).removeClass('sessions-accordion-item-not-collapsed');
+    $(this).addClass('sessions-accordion-item-collapsed');
+    $(this).find(".mb-0").removeClass("uparrow").addClass("downarrow");
+});
+
+</script> 
+     <div class="with-sidebar-wrapper"> 
+      <div class="with-sidebar-container container gdlr-class-no-sidebar"> 
+       <div class="with-sidebar-left twelve columns"> 
+        <div class="with-sidebar-content twelve columns"> 
+         <div class="gdlr-item gdlr-item-start-content"> 
+          <div class="sands-flex-outer-container"> 
+           <div class="sands-flex-container"> 
+            <div class="sands-inner-flex-container"> 
+             <div class="speaker-infos flexbox-1"> 
+              <!--  Speakers start --> 
+              <div class="speaker-boxes ws-lp">
+               <h3>Speaker</h3>
+               <div class="gdlr-speaker-thumbnail">
+                <div class="gdlr-speaker-thumbnail-inner">
+                 <a href="https://jax.de/speaker/peter-kern/">
+                  <div class="sands-image-colored-overlay-hover">
+                   <img src="https://jax.de/wp-content/uploads/2018/01/Peter-Kern-1.jpg" alt="Peter Kern" width="500" height="350">
+                  </div>
+                  <div class="span-speaker-container">
+                   <p class="span-speaker-left">Peter Kern</p>
+                   <p class="span-speaker-right">Mehr Info</p>
+                  </div></a>
+                </div>
+               </div>
+               <div class="gdlr-speaker-thumbnail">
+                <div class="gdlr-speaker-thumbnail-inner">
+                 <a href="https://jax.de/speaker/joerg-mueller/">
+                  <div class="sands-image-colored-overlay-hover">
+                   <img src="https://jax.de/wp-content/uploads/2018/01/Jörg-Müller-1.jpg" alt="Jörg Müller" width="500" height="350">
+                  </div>
+                  <div class="span-speaker-container">
+                   <p class="span-speaker-left">Jörg Müller</p>
+                   <p class="span-speaker-right">Mehr Info</p>
+                  </div></a>
+                </div>
+               </div>
+               <div class="gdlr-speaker-thumbnail">
+                <div class="gdlr-speaker-thumbnail-inner">
+                 <a href="https://jax.de/speaker/michael-ploed/">
+                  <div class="sands-image-colored-overlay-hover">
+                   <img src="https://jax.de/wp-content/uploads/2018/01/Michael-Plöd-1.jpg" alt="Michael Plöd" width="1024" height="684">
+                  </div>
+                  <div class="span-speaker-container">
+                   <p class="span-speaker-left">Michael Plöd</p>
+                   <p class="span-speaker-right">Mehr Info</p>
+                  </div></a>
+                </div>
+               </div>
+               <div class="gdlr-speaker-thumbnail">
+                <div class="gdlr-speaker-thumbnail-inner">
+                 <a href="https://jax.de/speaker/susanne-wagner/">
+                  <div class="sands-image-colored-overlay-hover">
+                   <img src="https://jax.de/wp-content/uploads/2018/01/Susanne-Wagner-2.jpg" alt="Susanne Wagner" width="500" height="350">
+                  </div>
+                  <div class="span-speaker-container">
+                   <p class="span-speaker-left">Susanne Wagner</p>
+                   <p class="span-speaker-right">Mehr Info</p>
+                  </div></a>
+                </div>
+               </div>
+               <div class="gdlr-speaker-thumbnail">
+                <div class="gdlr-speaker-thumbnail-inner">
+                 <a href="https://jax.de/speaker/eberhard-wolff/">
+                  <div class="sands-image-colored-overlay-hover">
+                   <img src="https://jax.de/wp-content/uploads/2018/01/Eberhard-Wolff-1.jpg" alt="Eberhard Wolff" width="500" height="350">
+                  </div>
+                  <div class="span-speaker-container">
+                   <p class="span-speaker-left">Eberhard Wolff</p>
+                   <p class="span-speaker-right">Mehr Info</p>
+                  </div></a>
+                </div>
+               </div>
+              </div> 
+              <!--  Speakers end --> 
+              <!--  call-for-action-box start --> 
+              <div class="clear"></div> 
+              <div class="call-for-action-box"> 
+               <div style="background-color:#f1f1f1; display:block; padding:15px 0 10px 0;"> 
+                <span style="font-size:24px; color:#000; display:block; font-weight:600; text-align: center">Nur bis 8.Februar!</span> 
+                <span style="font-size:19px; color:#000; display:block;">✓ Gratis Agile Day</span> 
+                <span style="font-size:19px; color:#000; display:block;">✓ Kollegenrabatt</span> 
+                <span style="font-size:19px; color:#000; display:block;">✓ Save up to 956 €</span> 
+                <a href="/tickets" style="background-color: #e2007a; border-bottom:3px solid #e2007a; color:#ffffff; padding:5px 25px 5px 25px; display:inline-block; text-transform:uppercase; letter-spacing: 2px;">Jetzt anmelden</a> 
+               </div> 
+              </div> 
+              <!--  call-for-action-box end --> 
+              <!-- MORE TALKS IN PROGRAM start --> 
+              <div class="clear"></div> 
+              <div class="col-md-12 col-xs-12 previous-next-container"> 
+               <div class="next-previous-heading"> 
+                <h3>Weitere Talks:</h3> 
+               </div> 
+               <div class="col-md-12 col-sm-12 col-xs-12 weiteretalkslink nomarginbox">
+                <div class="col-md-2 col-xs-2"></div>
+                <div class="col-md-12 col-xs-12 nomarginbox">
+                 <a href="https://jax.de/microservices/beyond-microservices-blick-hinter-den-hype/">Beyond Microservices – Blick hinter den Hype</a>
+                </div>
+               </div>
+               <div class="col-md-12 col-sm-12 col-xs-12 weiteretalkslink nomarginbox">
+                <div class="col-md-12 col-xs-12 nomarginbox">
+                 <a href="https://jax.de/serverside-enterprise-java/live-coding-mit-jax-rs-2-1-json-b-und-cdi-2-0/">Live-Coding mit JAX-RS 2.1, JSON-B und CDI 2.0</a>
+                </div>
+                <div class="col-md-12 col-xs-12"></div>
+               </div> 
+               <div class="col-md-12 col-sm-12 col-xs-12 weiteretalkslink nomarginbox"> 
+                <div class="col-md-12 col-xs-12 nomarginbox"> 
+                 <a class="anglearrow" href="https://jax.de/microservices/beyond-microservices-blick-hinter-den-hype/"><li class="fa  fa-angle-left  arrow-indicators"></li></a>
+                 <a class="anglearrow" href="https://jax.de/serverside-enterprise-java/live-coding-mit-jax-rs-2-1-json-b-und-cdi-2-0/"><li class="fa  fa-angle-right  arrow-indicators"></li></a> 
+                </div> 
+               </div> 
+              </div> 
+              <!-- MORE TALKS IN PROGRAM end --> 
+             </div> 
+             <div class="flexbox-2"> 
+              <div class="top-info-container"> 
+               <h5>Infos</h5> 
+               <div class="top-info-flex"> 
+                <div class="top-info"> 
+                 <!-- img class="topicon" src="/wp-content/themes/sands-events-subtheme/img/ic_date.png" style="width:28px; height:24px; margin-right: 8px;" / --> 
+                 <!-- <span class="ws-label"></span> --> 
+                 <span class="ws-label" style="font-weight: 600;">Freitag, 27. April 2018<br><span style="font-weight: 400;">09:00 - 17:00</span></span> 
+                </div> 
+                <div class="top-info">
+                 <strong>Buchungshinweis: <br></strong> Architektur Retreat Workshop
+                </div> 
+               </div> 
+              </div> 
+              <style> .padding-top-0.topcard.sessions-accordion-item{padding-top: 0px !important;} </style> 
+              <div id="accordion" role="tablist" aria-multiselectable="true"> 
+               <div class="topcard sessions-accordion-item sessions-accordion-item-not-collapsed"> 
+                <div class="card session-desc"> 
+                 <div class="card-header" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> 
+                  <h5 class="mb-0 uparrow"> Beschreibung </h5> 
+                 </div> 
+                 <div id="collapseTwo" class="collapse in" role="tabpanel" aria-labelledby="headingTwo"> 
+                  <div class="card-block session-desc-content"> 
+                   <!-- Description start --> 
+                   <p>Architektur ist eher ein trockenes, theoretisches Thema. Nicht bei diesem Workshop! Wir werden ganz praktisch Architekturen entwerfen, kommunizieren und verbessern. So lernen wir, worauf es wirklich ankommt. In mehreren Iterationen lernen wir Konzepte kennen, mit denen die Qualität eines Softwareprojekts verbessert werden kann.</p> 
+                   <div class="clear"></div>
+                   <div class="clear"></div>
+                   <div class="clear"></div> 
+                   <!-- Description end --> 
+                  </div> 
+                 </div> 
+                </div> 
+               </div> 
+               <!-- <div id="lastaccordion" class="topcard sessions-accordion-item sessions-accordion-item-not-collapsed lastaccordion"  data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> --> 
+               <div id="lastaccordion" class="topcard sessions-accordion-item sessions-accordion-item-not-collapsed lastaccordion"> 
+                <div class="card more-sessions"> 
+                 <div class="card-header" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> 
+                  <h5 class="mb-0 uparrow"> Weitere Sessions zum Thema </h5> 
+                 </div> 
+                 <div id="collapseThree" class="collapse in" role="tabpanel" aria-labelledby="headingThree"> 
+                  <div class="row card-block more-sessions-content"> 
+                   <!--  Weitere session zu thema start --> 
+                   <div class="row col-xs-12 col-sm-12 col-md-12">
+                    <div class="clear"></div>
+                    <div class="gdlr-item old-gdlr-accordion-item old-gdlr-multiple-tab style-1 old-conentinsideaccordion">
+                     <div class="old-accordion-tab old-active old-pre-active">
+                      <h4 class="old-accordion-title old-ijsstyle old-classicstyle"><span>Software Architecture</span></h4>
+                      <div class="old-accordion-content">
+                       <ul>
+                        <li><a href="https://jax.de/software-architecture/web-scale-in-der-holzklasse/">Web Scale in der Holzklasse</a></li>
+                        <li><a href="https://jax.de/digital-transformation-innovation/der-heilige-gral-plattform-oekonomie-bei-mir-finden-sie-antworten/">Der heilige Gral „Plattformökonomie“? Bei mir finden Sie Antworten</a></li>
+                        <li><a href="https://jax.de/software-architecture/software-analytics-fuer-praktiker/">Software Analytics für Praktiker</a></li>
+                        <li><a href="https://jax.de/software-architecture">[mehr]</a></li>
+                       </ul>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                  <!-- end row -->
+                  <div class="clear"></div> 
+                  <!--  Weitere session zu thema end --> 
+                 </div> 
+                </div> 
+               </div> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <!-- gdlr-item-start-content --> 
+        </div> 
+        <div class="clear"></div> 
+       </div> 
+       <div class="clear"></div> 
+      </div> 
+     </div> 
+    </div> 
+    <!-- gdlr-content --> 
+    <div class="clear"></div> 
+    <div class="sands-reuse-page-with-shortcode"> 
+     <div class="gdlr-content"> 
+      <!-- Above Sidebar Section--> 
+      <!-- Sidebar With Content Section--> 
+      <div class="with-sidebar-wrapper gdlr-type-no-sidebar">
+       <section id="content-section-1">
+        <div class="gdlr-color-wrapper  gdlr-hide-in-tablet-mobile no-skin" style="background-color: #1f386f; padding-top: 30px; padding-bottom: 30px; ">
+         <div class="container">
+          <div class="gdlr-item gdlr-content-item">
+           <div class="section-builder-request-info sectioncontainer" style="background-color: #1f386f; margin-top: 12px;"> 
+            <div class="container"> 
+             <div class="row"> 
+              <div class="col-xl-12 col-lg-12 col-md-12"> 
+               <div class="col-xl-6 col-lg-6 col-md-6" style="text-align: center; margin-top: 20px; color: white; font-size: 24px;">
+                Alle News der Java-Welt:
+               </div> 
+               <div class="col-xl-6 col-lg-6 col-md-6" style="text-align: center; margin: auto; max-height: 80px;"> 
+                <div class="cr_form-container">
+                 <style>.cr_response.cr_success, .cr_response.cr_error {color:#000000;} .cr_button:hover{background-color:#9d9603;color:#000000;} button:disabled, button[disabled]{ background-color: #cccccc !important; color: #666666 !important;}</style>
+                 <div class="container">
+                  <form data-list="524167" data-form="159987" id="form845992837640" class="abovefooter-horizontal" onsubmit="CRFromSubmit(845992837640).onsubmit(event);">
+                   <div class="sticky-nl-form-right-side field845992837640">
+                    <input id="text3257588" style="width:100%;" class="cr_ipe_item 845992837640" name="email" value="" placeholder="E-Mail *" type="email" required>
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 845992837640" name="" placeholder="">
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 845992837640" name="" placeholder="">
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 845992837640" name="" placeholder="">
+                    <input type="hidden" name="leadchannel" value="form17">
+                    <input type="hidden" name="" value="">
+                    <input type="hidden" name="" value="">
+                    <button id="cr_button" style="background-color:#c1b802; color:#ffffff;" type="submit" class="cr_button cr_submit_button 845992837640">senden<i class="spinnerdiv  845992837640"></i></button>
+                   </div>
+                  </form>
+                 </div>
+                </div>
+               </div> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div>
+          <div class="clear"></div>
+          <div class="clear"></div>
+         </div>
+        </div>
+        <div class="clear"></div>
+       </section>
+       <section id="content-section-2">
+        <div class="gdlr-color-wrapper  gdlr-hide-in-desktop no-skin" style="background-color: #1f386f; padding-top: 30px; padding-bottom: 30px; ">
+         <div class="container">
+          <div class="gdlr-item gdlr-content-item" style="margin-bottom: 5px;">
+           <div class="section-builder-request-info sectioncontainer" style="background-color: #1f386f;"> 
+            <div class="container"> 
+             <div class="row"> 
+              <div class="col-xl-12 col-lg-12 col-md-12"> 
+               <div class="col-xl-6 col-lg-6 col-md-6" style="margin-top: 20px; font-size: 24px; color: white;">
+                Alle News der Java-Welt:
+               </div> 
+               <div class="col-xl-6 col-lg-6 col-md-6" style="margin: auto;"> 
+                <p style="text-align: center;"> </p>
+                <div class="cr_form-container">
+                 <style>.cr_response.cr_success, .cr_response.cr_error {color:#000000;} .cr_button:hover{background-color:#9d9603;color:#000000;} button:disabled, button[disabled]{ background-color: #cccccc !important; color: #666666 !important;}</style>
+                 <div class="container">
+                  <form data-list="524167" data-form="159987" id="form669562777003" class="popup-vertical" onsubmit="CRFromSubmit(669562777003).onsubmit(event);">
+                   <div class="sticky-nl-form-right-side field669562777003">
+                    <input id="text3257588" style="width:100%;" class="cr_ipe_item 669562777003" name="email" value="" placeholder="E-Mail *" type="email" required>
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 669562777003" name="" placeholder="">
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 669562777003" name="" placeholder="">
+                    <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 669562777003" name="" placeholder="">
+                    <input type="hidden" name="leadchannel" value="form17">
+                    <input type="hidden" name="" value="">
+                    <input type="hidden" name="" value="">
+                    <button id="cr_button" style="background-color:#c1b802; color:#ffffff;" type="submit" class="cr_button cr_submit_button 669562777003">senden<i class="spinnerdiv  669562777003"></i></button>
+                   </div>
+                  </form>
+                 </div>
+                </div>
+                <p></p> 
+               </div> 
+               <div></div> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div>
+          <div class="clear"></div>
+          <div class="clear"></div>
+         </div>
+        </div>
+        <div class="clear"></div>
+       </section>
+       <section id="content-section-3">
+        <div class="gdlr-color-wrapper  gdlr-show-all gdlr-skin-mtc-spring-skin-wei" style="background-color: #1f386f; padding-top: 40px; padding-bottom: 20px; ">
+         <div class="container">
+          <div class="clear"></div>
+          <div class="gdlr-item gdlr-divider-item" style="margin-bottom: 5px;">
+           <div class="gdlr-divider solid"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="gdlr-title-item" style="margin-bottom: 40px;">
+           <div class="gdlr-item-title-wrapper gdlr-item pos-center ">
+            <div class="gdlr-item-title-head">
+             <h2 class="gdlr-item-title gdlr-skin-title gdlr-skin-border gdlr-title-medium">Behind the Tracks of JAX 2018</h2>
+             <div class="clear"></div>
+            </div>
+           </div>
+          </div>
+          <div class="clear"></div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a href="/tracks/agile-culture/" style="color: #ffffff; text-decoration: underline;">Agile &amp; Culture</a></strong> </span></span><br> <span style="color: #ffffff;">Teamwork &amp; Methoden</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a href="/big-data-machine-learning/" style="color: #ffffff; text-decoration: underline;">Big Data &amp; Machine Learning</a></strong> </span></span><br> <span style="color: #ffffff;"> Speicherung, Processing &amp; mehr</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a href="/cloud-container-serverless/" style="color: #ffffff; text-decoration: underline;">Clouds, Container &amp; Serverless</a></strong> </span></span><br> <span style="color: #ffffff;"> Alles rund um Cloud</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/core-java-jvm-languages/">Core Java &amp; JVM Languages</a></strong> </span></span><br> <span style="color: #ffffff;">Ausblicke &amp; Best Practices</span></p> 
+           </div>
+          </div>
+          <div class="clear"></div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/devops-continuous-delivery/">DevOps &amp; Continuous Delivery</a></strong> </span></span><br> <span style="color: #ffffff;">Deployment, Docker &amp; mehr</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/microservices/">Microservices</a></strong> </span></span><br> <span style="color: #ffffff;">Strukturen &amp; Frameworks</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/web-development-javascript/">Web Development &amp; JavaScript</a></strong> </span></span><br> <span style="color: #ffffff;"> JS &amp; Webtechnologien</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/performance-security/">Performance &amp; Security</a></strong> </span></span><br> <span style="color: #ffffff;"> Sichere Webanwendungen</span></p> 
+           </div>
+          </div>
+          <div class="clear"></div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong> <a style="color: #ffffff; text-decoration: underline;" href="/tracks/serverside-enterprise-java/">Serverside &amp; Enterprise Java</a></strong> </span></span><br> <span style="color: #ffffff;">Spring, JDK &amp; mehr</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong><a style="text-decoration: underline; color: #ffffff;" href="/tracks/digital-transformation-innovation/">Digital Transformation &amp; Innovation</a></strong> </span></span><br> <span style="color: #ffffff;"> Technologien &amp; Vorgehensweisen</span></p> 
+           </div>
+          </div>
+          <div class="three columns">
+           <div class="gdlr-item gdlr-content-item">
+            <p><span style="text-decoration: underline; color: #ffffff;"><span style="font-size: large;"><strong><a style="text-decoration: underline; color: #ffffff;" href="/tracks/software-architecture/">Software Architecture</a></strong> </span></span><br> <span style="color: #ffffff;"> Best Practices<br> </span></p> 
+           </div>
+          </div>
+          <div class="clear"></div>
+         </div>
+        </div>
+        <div class="clear"></div>
+       </section>
+      </div> 
+      <!-- Below Sidebar Section--> 
+     </div> 
+     <div id="text-18" class="widget widget_text"> 
+      <div class="textwidget"></div> 
+     </div>
+    </div> 
+    <div class="clear"></div> 
+   </div>
+   <!-- content wrapper --> 
+   <footer class="footer-wrapper"> 
+    <div class="footer-container container"> 
+     <div class="footer-column three columns" id="footer-widget-1"> 
+      <div id="text-23" class="widget widget_text gdlr-item gdlr-widget">
+       <h3 class="gdlr-widget-title">JAX 2018</h3>
+       <div class="clear"></div> 
+       <div class="textwidget">
+        <p>Die Konferenz für Java, Architektur und Software-Innovation mit mehr als 170 internationalen Speakern.</p> 
+        <div class="clear"></div> 
+        <div class="gdlr-space" style="margin-top: 30px;"></div> 
+        <p><a href="https://www.facebook.com/JaxKonferenz" target="_blank"><i class="gdlr-icon fa fa-facebook-square" style="color: #00569d; font-size: 24px; "></i></a> <a href="https://twitter.com/jaxcon" target="_blank"><i class="gdlr-icon fa fa-twitter-square" style="color: #00569d; font-size: 24px; "></i></a> <a href="https://plus.google.com/111423995672878686488" target="_blank"><i class="gdlr-icon fa fa-google-plus-square" style="color: #00569d; font-size: 24px; "></i></a></p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="footer-column three columns" id="footer-widget-2"> 
+      <div id="text-11" class="widget widget_text gdlr-item gdlr-widget">
+       <h3 class="gdlr-widget-title">Sponsor werden</h3>
+       <div class="clear"></div> 
+       <div class="textwidget">
+        <p>Ihr erfolgreicher Auftritt<br> auf der JAX 2018 in Mainz!</p> 
+        <div class="clear"></div> 
+        <div class="gdlr-space" style="margin-top: 27px;"></div> 
+        <p><a class="gdlr-button small with-border" href="https://jax.de/sponsor-werden/" target="_self" style="color:#ffffff; background-color:#00569d; border-color:#00346C; ">Sponsor werden</a></p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="footer-column three columns" id="footer-widget-3"> 
+      <div id="text-10" class="widget widget_text gdlr-item gdlr-widget">
+       <h3 class="gdlr-widget-title">Exklusive Specials</h3>
+       <div class="clear"></div> 
+       <div class="textwidget">
+        Bis zum 8. Februar:
+        <br> ✓ Gratis-Agile-Day
+        <br> ✓ Kollegenrabatt
+        <br> ✓ Bis 956 € sparen
+        <br> 
+        <div class="clear"></div>
+        <div class="gdlr-space" style="margin-top: 27px;"></div> 
+        <a class="gdlr-button small with-border" href="/tickets" target="_self" style="color:#ffffff; background-color:#00569d; border-color:#00346C; ">Jetzt anmelden</a>
+       </div> 
+      </div> 
+     </div> 
+     <div class="footer-column three columns" id="footer-widget-4"> 
+      <div id="text-13" class="widget widget_text gdlr-item gdlr-widget">
+       <h3 class="gdlr-widget-title">Newsletter-Anmeldung</h3>
+       <div class="clear"></div> 
+       <div class="textwidget">
+        Erhalten Sie regelmäßig News zur JAX und der Java-Community! 
+        <div class="clear"></div>
+        <div class="gdlr-space" style="margin-top: 27px;"></div> 
+        <a class="gdlr-button small with-border" href="/newsletter/" target="_self" style="color:#ffffff; background-color:#00569d; border-color:#00346C; ">Newsletter bestellen</a>
+        <p></p>
+       </div> 
+      </div> 
+     </div> 
+     <div class="clear"></div> 
+    </div> 
+    <div class="copyright-wrapper"> 
+     <div class="copyright-container container"> 
+      <div class="copyright-left"> 
+       <div id="text-28" class="widget widget_text"> 
+        <div class="textwidget">
+         © Copyright 2017 S&amp;S Media, All Rights Reserved
+        </div> 
+       </div> 
+      </div> 
+      <div class="copyright-right"> 
+       <div id="text-27" class="widget widget_text"> 
+        <div class="textwidget">
+         <a href="/veranstalter">Veranstalter</a> | 
+         <a href="/Datenschutz">Datenschutz</a> | 
+         <a href="/impressum">Impressum</a> | 
+         <a href="/agb">AGB</a> | 
+         <a href="/kontakt">Kontaktieren Sie uns</a>
+        </div> 
+       </div> 
+      </div> 
+      <div class="clear"></div> 
+     </div> 
+    </div> 
+   </footer> 
+  </div> 
+  <!-- body-wrapper --> 
+  <div id="wbounce-modal" class="wbounce-modal underlay" style="display:none"> 
+   <div id="wbounce-modal-flex" class="wbounce-modal-flex"> 
+    <div id="wbounce-modal-sub" class="wbounce-modal-sub"> 
+     <div style="background-color: #1F386F; min-height:45%;"> 
+      <div class="modal-title"> 
+       <h3>ALLE NEWS ZUR JAX!</h3> 
+      </div> 
+      <div class="modal-body section-builder-request-info sectioncontainer" style="border-bottom-color: #00569d; border-bottom-style: solid; border-width: 0px;"> 
+       <div class=""> 
+        <div class=""> 
+         <div class="nl-ctatext" style="color: white; font-size: 20px; margin-top: 30px;">
+          <b>TEIL UNSERER COMMUNITY WERDEN <br>UND IMMER UP TO DATE BLEIBEN!</b> 
+         </div> 
+         <div class="nlform" style="margin: 20px 0px 20px 0px; padding: 0px;"> 
+          <div class="" id="mc_embed_signup"> 
+           <div class="cr_form-container">
+            <style>.cr_response.cr_success, .cr_response.cr_error {color:#000000;} .cr_button:hover{background-color:#9d9603;color:#000000;} button:disabled, button[disabled]{ background-color: #cccccc !important; color: #666666 !important;}</style>
+            <div class="container">
+             <form data-list="524167" data-form="159987" id="form332782649901" class="popup-horizontal" onsubmit="CRFromSubmit(332782649901).onsubmit(event);">
+              <div class="sticky-nl-form-right-side field332782649901">
+               <input id="text3257588" style="width:100%;" class="cr_ipe_item 332782649901" name="email" value="" placeholder="E-Mail *" type="email" required>
+               <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 332782649901" name="" placeholder="">
+               <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 332782649901" name="" placeholder="">
+               <input style="background-color:#f7f7f7;color:#313131;" type="text" class="field-hidden cr_ipe_item 332782649901" name="" placeholder="">
+               <input type="hidden" name="leadchannel" value="form17">
+               <input type="hidden" name="" value="">
+               <input type="hidden" name="" value="">
+               <button id="cr_button" style="background-color:#c1b802; color:#ffffff;" type="submit" class="cr_button cr_submit_button 332782649901">senden<i class="spinnerdiv  332782649901"></i></button>
+              </div>
+             </form>
+            </div>
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="wbounce-config" style="display: none;">
+   {"cookieName":"wBounce","isAggressive":false,"isSitewide":true,"hesitation":"1","openAnimation":false,"exitAnimation":false,"timer":"","sensitivity":"","cookieExpire":"1","cookieDomain":"","autoFire":"","isAnalyticsEnabled":false}
+  </div> 
+  <script>
+				jQuery( document ).ready(function($) {
+					$(window).bind('scroll', function() {
+				         if ($(window).scrollTop() > 50) {
+				             $('.gdlr-header-inner .container').css("background-color", "rgba(255,255,255,0.8)");
+					 }
+					 else if(($('body').hasClass('tax-track')) || ($('body').hasClass('error404'))){
+					     $('.gdlr-header-inner .container').css("background-color", "rgba(255,255,255,0.8)");
+					 }
+				         else {
+				             $('.gdlr-header-inner .container').css("background-color", "transparent");
+				         }
+				   	 });	  
+				});
+
+				</script> 
+  <script>
+		jQuery(document).ready(function($){
+	
+			$( ".dl-trigger" ).click(function() {
+  				$(".gdlr-main-mobile-menu").css({display: "block", opacity: "1" })
+  			
+  				
+			});
+		});
+		</script> 
+  <div class="scroll-back-to-top-wrapper"> 
+   <span class="scroll-back-to-top-inner"> <i class="fa fa-2x fa-arrow-circle-up"></i> </span> 
+  </div>
+  <script type="text/javascript">
+var recaptchaWidgets = [];
+var recaptchaCallback = function() {
+	var forms = document.getElementsByTagName('form');
+	var pattern = /(^|\s)g-recaptcha(\s|$)/;
+
+	for (var i = 0; i < forms.length; i++) {
+		var divs = forms[i].getElementsByTagName('div');
+
+		for (var j = 0; j < divs.length; j++) {
+			var sitekey = divs[j].getAttribute('data-sitekey');
+
+			if (divs[j].className && divs[j].className.match(pattern) && sitekey) {
+				var params = {
+					'sitekey': sitekey,
+					'theme': divs[j].getAttribute('data-theme'),
+					'type': divs[j].getAttribute('data-type'),
+					'size': divs[j].getAttribute('data-size'),
+					'tabindex': divs[j].getAttribute('data-tabindex')
+				};
+
+				var callback = divs[j].getAttribute('data-callback');
+
+				if (callback && 'function' == typeof window[callback]) {
+					params['callback'] = window[callback];
+				}
+
+				var expired_callback = divs[j].getAttribute('data-expired-callback');
+
+				if (expired_callback && 'function' == typeof window[expired_callback]) {
+					params['expired-callback'] = window[expired_callback];
+				}
+
+				var widget_id = grecaptcha.render(divs[j], params);
+				recaptchaWidgets.push(widget_id);
+				break;
+			}
+		}
+	}
+}
+</script> 
+  <script type="text/javascript">jQuery(document).ready(function() {
+    jQuery(".page-id-3304 .sands-ticket-day-content, .page-id-47622 .sands-ticket-day-content, .page-id-46260 .sands-ticket-day-content, .page-id-47676 .sands-ticket-day-content").each(function() {
+//console.log($(this));
+        var txt1 = jQuery(this).find('.day-date-day-of-week').text();
+         var txt2 = txt1.trim();
+        if (txt2 == "Konferenztag" || txt2 == "Conference Day") {
+            $(this).addClass('conferenceday');
+        } else {
+            $(this).addClass('workshopday');
+        }
+    });
+});
+
+  
+jQuery(document).ready(function() {
+    var patternspeakers = "";
+    patternspeakers += "<img src='/wp-content/uploads/2017/11/JAX_18_Website_Pattern_Speaker_rechts.png' style='position: absolute; top: 0px; right: 0px; z-index: 0;'>";
+    patternspeakers += "<img src='/wp-content/uploads/2017/11/JAX_18_Website_Pattern_Speaker_links.png' style='position: absolute; bottom: 0px; left: 0px; z-index: 0;'>";
+
+    if (jQuery("#speakers-container-pattern").length) {
+        jQuery("#speakers-container-pattern").prepend(jQuery(patternspeakers));
+    }
+});
+
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 0) {
+        $('.cc_banner-wrapper').fadeOut();
+    } else {
+        $('.cc_banner-wrapper').fadeOut();
+    }
+});
+
+jQuery(document).ready(function($) {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+            $('.cc_banner-wrapper').fadeOut();
+            $('.dl-menuwrapper button').addClass('mob-blue-icon');
+            $('body.home .gdlr-logo img').addClass('mob_show_logo');
+            $('body.home .gdlr-logo img').removeClass('mob_hide_logo');
+
+        } else {
+            $('.dl-menuwrapper button').removeClass('mob-blue-icon');
+            $('.cc_banner-wrapper').fadeOut();
+            $('body.home .gdlr-logo img').addClass('mob_hide_logo');
+            $('body.home .gdlr-logo img').removeClass('mob_show_logo');
+        }
+
+    });
+
+    var click = 0;
+    $(".gdlr-main-mobile-menu").on('click', function() {
+        if (click == 0) {
+            $(".clicked").children('ul').css('display', 'block');
+            click = 1;
+        } else {
+            $(".clicked").children('ul').css('display', 'none');
+            click = 0;
+        }
+
+    });
+
+
+    $(".gdlr-navigation-wrapper .gdlr-navigation ul.gdlr-main-menu > li ul.sub-menu > li ul.sub-menu").last().addClass('lastsubmenuitem');
+    $('.lastsubmenuitem').each(function() {
+        this.style.setProperty('top', '-303px', 'important');
+    });
+
+
+    var thisH = 0;
+    var maxHeight = 0;
+    $('.gdlr-ticket-content').each(function() {
+        thisH = $(this).outerHeight();
+        if (thisH > maxHeight) {
+            maxHeight = thisH;
+        }
+    });
+    $('.gdlr-ticket-item .gdlr-ticket-content').css('min-height', maxHeight + 'px');
+    thisH = 0;
+    maxHeight = 0;
+    $('.gdlr-ticket-head').each(function() {
+        thisH = $(this).outerHeight();
+        if (thisH > maxHeight) {
+            maxHeight = thisH;
+        }
+    });
+    $('.gdlr-ticket-item .gdlr-ticket-head').css('min-height', maxHeight + 'px');
+
+   /* jQuery('.page-id-3304 .footer-wrapper .copyright-wrapper').css("margin-bottom", "70px");
+    jQuery('.page-id-47622 .footer-wrapper .copyright-wrapper').css("margin-bottom", "70px");*/
+    jQuery('.nlform-close').click(function(e) {
+        e.preventDefault();
+        jQuery('#nlform-slide').css("display", "none");
+        jQuery('.page-id-3304 .footer-wrapper .copyright-wrapper').css("margin-bottom", "0px");
+        jQuery('.page-id-47622 .footer-wrapper .copyright-wrapper').css("margin-bottom", "0px");
+    });
+});
+
+function init() {
+    var vidDefer = document.getElementsByTagName('iframe');
+    for (var i = 0; i < vidDefer.length; i++) {
+        if (vidDefer[i].getAttribute('data-src')) {
+            vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
+        }
+    }
+}
+window.onload = init;</script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1","jqueryUi":"1"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/sands_advanced_tickets_display/assets/js/sands_advanced_tickets_display.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/sands_advanced_tickets_display/assets/libs/jquery.bxslider/jquery.bxslider.min.js?x34188"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var scrollBackToTop = {"scrollDuration":"500","fadeDuration":"0.5"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=de&amp;ver=2.1"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/ui/core.min.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/ui/datepicker.min.js?x34188"></script> 
+  <script type="text/javascript">
+jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Schlie\u00dfen","currentText":"Heute","monthNames":["Januar","Februar","M\u00e4rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"monthNamesShort":["Jan","Feb","Mrz","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],"nextText":"Weiter","prevText":"Vorherige","dayNames":["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],"dayNamesShort":["So","Mo","Di","Mi","Do","Fr","Sa"],"dayNamesMin":["S","M","D","M","D","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+</script> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/ui/widget.min.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/ui/button.min.js?x34188"></script> 
+  <script type="text/javascript" src="https://jax.de/wp-includes/js/jquery/ui/spinner.min.js?x34188"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var cre = {"ajaxurl":"https:\/\/jax.de\/wp-admin\/admin-ajax.php","nonce":"45662508d5","loading":"Speichern...","success":"Bitte best\u00e4tige die Anmeldung noch \u00fcber den Link in der Best\u00e4tigungs-Email.","error":"Sorry, es gab ein Problem beim Speichern deiner Daten. Bitte probiere es sp\u00e4ter noch einmal oder kontaktiere einen Administrator.","selector":".","container_selector":"cr_form-container","loading_selector":"cr_loading","success_selector":"cr_success","response_selector":"cr_response","error_selector":"cr_error"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://jax.de/wp-content/plugins/cleverreach-extension-master/public/js/cleverreach-extension-public.min.js?x34188"></script> 
+  <!-- Google Tag Manager --> 
+  <noscript>
+   <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PRXPLV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PRXPLV');</script> 
+  <!-- End Google Tag Manager --> 
+  <!-- Facebook Pixel Code --> 
+  <script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '407071789447604'); // Insert your pixel ID here.
+fbq('track', 'PageView');
+</script> 
+  <noscript>
+   <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=407071789447604&amp;ev=PageView&amp;noscript=1">
+  </noscript> 
+  <!-- DO NOT MODIFY --> 
+  <!-- End Facebook Pixel Code --> 
+  <!-- Twitter universal website tag code --> 
+  <script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','nxros');
+twq('track','PageView');
+</script> 
+  <!-- End Twitter universal website tag code -->
+  <script type="text/javascript" src="https://jax.de/wp-content/cache/minify/a6476.default.include-footer.836f08.js?x34188"></script>   
+  <div class="gdlr-content"> 
+  </div>
+  <!-- gdlr-content --> 
+  <!-- GOOGLE Code for Remarketing Tag --> 
+  <script type="text/javascript">
+/* <![CDATA[ /
+var google_conversion_id = 964061368;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/ ]]> */
+</script> 
+  <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script> 
+  <noscript> 
+   <div style="display:inline;"> 
+    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/964061368/?value=0&amp;guid=ON&amp;script=0"> 
+   </div> 
+  </noscript> 
+  <!-- End GOOGLE Cookie Tracking --> 
+  <!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Page Caching using disk: enhanced
+Minified using disk
+
+ Served from: jax.de @ 2018-01-29 16:59:22 by W3 Total Cache -->
+ </body>
+</html>
