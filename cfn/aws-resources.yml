@@ -33,8 +33,8 @@ Resources:
       CodeUri: ../lambda-modules/lambda.backend/target/lambda.backend.jar
       Handler: de.networkchallenge.e2c.lambda.backend.MainHandler
       Runtime: java8
-      MemorySize: 320
-      Timeout: 90
+      MemorySize: 256
+      Timeout: 30
       Environment:
         Variables:
           BUCKET: !Ref AddToCalendarBucket
