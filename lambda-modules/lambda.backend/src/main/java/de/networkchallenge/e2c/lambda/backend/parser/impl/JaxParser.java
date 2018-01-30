@@ -2,12 +2,12 @@ package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
+import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +20,9 @@ import java.util.Locale;
  */
 @Component
 public class JaxParser implements IEventParser {
+    private final static TimeParser TP_DE = new TimeParser("d. MMMM uuuu HH:mm xxx", Locale.GERMANY);
+    private final static TimeParser TP_US = new TimeParser("MMMM d uuuu HH:mm xxx", Locale.US);
+
     @Override
     public List<String> getBaseUris() {
         return Arrays.asList("jax.de");
@@ -34,20 +37,26 @@ public class JaxParser implements IEventParser {
         Elements sessionInfo = doc.select("span.ws-label");
         String date = sessionInfo.first().ownText().split(",")[1].trim();
         String period = sessionInfo.select("span").get(1).text();
-        return ZonedDateTime.parse(date + " " + period.split(" - ")[1] + " +02:00",
-                DateTimeFormatter.ofPattern("d. MMMM uuuu HH:mm xxx").withLocale(Locale.GERMANY));
+        return parseLocaleDateTime(doc,date + " " + period.split(" - ")[1] + " +02:00");
     }
 
     private ZonedDateTime parseBegin(Document doc) {
         Elements sessionInfo = doc.select("span.ws-label");
         String date = sessionInfo.first().ownText().split(",")[1].trim();
         String period = sessionInfo.select("span").get(1).text();
-        return ZonedDateTime.parse(date + " " + period.split(" - ")[0] + " +02:00",
-                DateTimeFormatter.ofPattern("d. MMMM uuuu HH:mm xxx").withLocale(Locale.GERMANY));
+        return parseLocaleDateTime(doc,date + " " + period.split(" - ")[0] + " +02:00");
     }
 
     private String parseTitle(Document doc) {
         Elements titles = doc.select("h2.gdlr-page-title");
         return titles.stream().findFirst().orElseThrow(() -> new IllegalStateException("no title found")).text();
+    }
+
+    private ZonedDateTime parseLocaleDateTime(Document doc, String pattern)
+    {
+        if (doc.select("html").first().attr("lang").startsWith("en"))
+            return TP_US.parse(pattern);
+        else
+            return TP_DE.parse(pattern);
     }
 }
