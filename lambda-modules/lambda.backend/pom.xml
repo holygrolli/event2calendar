@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.amazonaws.serverless</groupId>
 			<artifactId>aws-serverless-java-container-spark</artifactId>
-			<version>0.7</version>
+			<version>0.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>

@@ -1,12 +1,13 @@
 package de.networkchallenge.e2c.lambda.backend;
 
 import com.amazonaws.serverless.exceptions.ContainerInitializationException;
-import com.amazonaws.serverless.proxy.internal.model.AwsProxyRequest;
-import com.amazonaws.serverless.proxy.internal.model.AwsProxyResponse;
+import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
+import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spark.SparkLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import de.networkchallenge.e2c.lambda.backend.handler.UrlController;
+import spark.Spark;
 
 import static spark.Spark.before;
 
@@ -26,14 +27,16 @@ public class MainHandler implements RequestHandler<AwsProxyRequest, AwsProxyResp
 
     public AwsProxyResponse handleRequest(AwsProxyRequest awsProxyRequest, Context context) {
         if (!initialized) {
-            defineRoutes();
             initialized = true;
+            defineRoutes();
+            Spark.awaitInitialization();
         }
         return handler.proxy(awsProxyRequest, context);
     }
 
     public static void main(String... args){
         defineRoutes();
+        Spark.awaitInitialization();
     }
     private static void defineRoutes() {
         before((request, response) -> {
