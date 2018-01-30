@@ -5,7 +5,6 @@ import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -18,7 +17,6 @@ import java.util.Locale;
  *     <span class="ws-label" style="font-weight: 600;">Freitag, 27. April 2018<br><span style="font-weight: 400;">09:00 - 17:00</span></span>
  *     </pre>
  */
-@Component
 public class JaxParser implements IEventParser {
     private final static TimeParser TP_DE = new TimeParser("d. MMMM uuuu HH:mm xxx", Locale.GERMANY);
     private final static TimeParser TP_US = new TimeParser("MMMM d uuuu HH:mm xxx", Locale.US);
