@@ -8,9 +8,6 @@ import java.util.List;
  */
 public class DevOpsConParser extends AbstractSuSMediaParser {
 
-    DevOpsConParser() {
-    }
-
     @Override
     public List<String> getBaseUris() {
         return Collections.singletonList("devopsconference.de");
