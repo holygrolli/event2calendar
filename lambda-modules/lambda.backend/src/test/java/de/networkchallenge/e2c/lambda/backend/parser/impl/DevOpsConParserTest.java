@@ -34,11 +34,11 @@ public class DevOpsConParserTest {
 		DevOpsConParser parser = new DevOpsConParser();
 		CalendarEvent event = parser.parse(Jsoup.parse(new File(URL.getPath()), "UTF-8")).get(0);
 		assertNotNull(event);
-		assertEquals("Docker Container Loading", event.getTitle());
-		assertEquals(ZonedDateTime.parse("2017-06-14T10:15:00+02:00"), event.getEventBegin());
-		assertEquals("20170614T081500Z", event.getEventBeginGMT());
-		assertEquals(ZonedDateTime.parse("2017-06-14T11:15:00+02:00"), event.getEventEnd());
-		assertEquals("20170614T091500Z", event.getEventEndGMT());
+		assertEquals("Es muss nicht gleich Docker sein – IT Automation, die zu einem passt", event.getTitle());
+		assertEquals(ZonedDateTime.parse("2018-05-29T10:00:00+02:00"), event.getEventBegin());
+		assertEquals("20180529T080000Z", event.getEventBeginGMT());
+		assertEquals(ZonedDateTime.parse("2018-05-29T11:00:00+02:00"), event.getEventEnd());
+		assertEquals("20180529T090000Z", event.getEventEndGMT());
 	}
 
 	@Test
@@ -46,10 +46,10 @@ public class DevOpsConParserTest {
 		DevOpsConParser parser = new DevOpsConParser();
 		CalendarEvent event = parser.parse(Jsoup.parse(new File(URL2.getPath()), "UTF-8")).get(0);
 		assertNotNull(event);
-		assertEquals("Web Hacking: Pentesting and attacking Web Apps (sold out)", event.getTitle());
-		assertEquals(ZonedDateTime.parse("2017-06-12T09:30:00+02:00"), event.getEventBegin());
-		assertEquals("20170612T073000Z", event.getEventBeginGMT());
-		assertEquals(ZonedDateTime.parse("2017-06-12T17:30:00+02:00"), event.getEventEnd());
-		assertEquals("20170612T153000Z", event.getEventEndGMT());
+		assertEquals("Kubernete-Architektur 101", event.getTitle());
+		assertEquals(ZonedDateTime.parse("2018-05-29T11:45:00+02:00"), event.getEventBegin());
+		assertEquals("20180529T094500Z", event.getEventBeginGMT());
+		assertEquals(ZonedDateTime.parse("2018-05-29T12:45:00+02:00"), event.getEventEnd());
+		assertEquals("20180529T104500Z", event.getEventEndGMT());
 	}
 }
