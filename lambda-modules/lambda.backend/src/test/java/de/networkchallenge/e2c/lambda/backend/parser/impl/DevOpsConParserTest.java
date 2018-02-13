@@ -31,7 +31,7 @@ public class DevOpsConParserTest {
 
 	@Test
 	public void parse() throws IOException {
-		DevOpsConParser parser = new DevOpsConParser();
+		AbstractSuSMediaParser parser = new DevOpsConParser();
 		CalendarEvent event = parser.parse(Jsoup.parse(new File(URL.getPath()), "UTF-8")).get(0);
 		assertNotNull(event);
 		assertEquals("Es muss nicht gleich Docker sein – IT Automation, die zu einem passt", event.getTitle());
@@ -43,7 +43,7 @@ public class DevOpsConParserTest {
 
 	@Test
 	public void parse2() throws IOException {
-		DevOpsConParser parser = new DevOpsConParser();
+		AbstractSuSMediaParser parser = new DevOpsConParser();
 		CalendarEvent event = parser.parse(Jsoup.parse(new File(URL2.getPath()), "UTF-8")).get(0);
 		assertNotNull(event);
 		assertEquals("Kubernete-Architektur 101", event.getTitle());

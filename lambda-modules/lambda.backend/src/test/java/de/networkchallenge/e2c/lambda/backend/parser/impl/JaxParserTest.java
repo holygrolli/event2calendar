@@ -30,7 +30,7 @@ public class JaxParserTest {
     }
     @Test
     public void getBaseUris() throws Exception {
-        JaxParser parser = new JaxParser();
+        AbstractSuSMediaParser parser = new JaxParser();
         Assert.assertTrue(parser.getBaseUris().contains("jax.de"));
         Assert.assertTrue(parser.getBaseUris().size() == 1);
 
