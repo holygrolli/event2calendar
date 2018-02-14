@@ -42,9 +42,9 @@ public class JaxParserTest {
         CalendarEvent event = parser.parse(Jsoup.parse(new File(URL.getPath()), "UTF-8")).get(0);
         assertNotNull(event);
         assertEquals("The unshippable Product Increment", event.getTitle());
-        assertEquals(ZonedDateTime.parse("2018-04-24T09:45:00+02:00"), event.getEventBegin());
+        assertEquals(ZonedDateTime.parse("2018-04-24T09:45:00+02:00[Europe/Berlin]"), event.getEventBegin());
         assertEquals("20180424T074500Z", event.getEventBeginGMT());
-        assertEquals(ZonedDateTime.parse("2018-04-24T10:45:00+02:00"), event.getEventEnd());
+        assertEquals(ZonedDateTime.parse("2018-04-24T10:45:00+02:00[Europe/Berlin]"), event.getEventEnd());
         assertEquals("20180424T084500Z", event.getEventEndGMT());
     }
     @Test
@@ -53,9 +53,9 @@ public class JaxParserTest {
         CalendarEvent event = parser.parse(Jsoup.parse(new File(URL2.getPath()), "UTF-8")).get(0);
         assertNotNull(event);
         assertEquals("Architektur Retreat Workshop", event.getTitle());
-        assertEquals(ZonedDateTime.parse("2018-04-27T09:00:00+02:00"), event.getEventBegin());
+        assertEquals(ZonedDateTime.parse("2018-04-27T09:00:00+02:00[Europe/Berlin]"), event.getEventBegin());
         assertEquals("20180427T070000Z", event.getEventBeginGMT());
-        assertEquals(ZonedDateTime.parse("2018-04-27T17:00:00+02:00"), event.getEventEnd());
+        assertEquals(ZonedDateTime.parse("2018-04-27T17:00:00+02:00[Europe/Berlin]"), event.getEventEnd());
         assertEquals("20180427T150000Z", event.getEventEndGMT());
     }
 
@@ -65,9 +65,9 @@ public class JaxParserTest {
         CalendarEvent event = parser.parse(Jsoup.parse(new File(URL_EN.getPath()), "UTF-8")).get(0);
         assertNotNull(event);
         assertEquals("The unshippable Product Increment", event.getTitle());
-        assertEquals(ZonedDateTime.parse("2018-04-24T09:45:00+02:00"), event.getEventBegin());
+        assertEquals(ZonedDateTime.parse("2018-04-24T09:45:00+02:00[Europe/Berlin]"), event.getEventBegin());
         assertEquals("20180424T074500Z", event.getEventBeginGMT());
-        assertEquals(ZonedDateTime.parse("2018-04-24T10:45:00+02:00"), event.getEventEnd());
+        assertEquals(ZonedDateTime.parse("2018-04-24T10:45:00+02:00[Europe/Berlin]"), event.getEventEnd());
         assertEquals("20180424T084500Z", event.getEventEndGMT());
     }
 

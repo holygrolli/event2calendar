@@ -6,8 +6,9 @@ import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,19 +20,14 @@ public class AzureSaturdayParser implements IEventParser {
 
 	private final static TimeParser TP = new TimeParser("MMMM d, uuuu HH:mm xxx", Locale.US);
 
-	public AzureSaturdayParser() {
+	@Override
+	public List<String> getBaseUris() {
+		return Collections.singletonList("azuresaturday.de");
 	}
 
-	private ZonedDateTime parseEnd(Document doc) {
-		String date = doc.select("div.conference-date").text();
-		String period = doc.select("div.conference-time").text();
-		return TP.parse(date + " " + period.split("-")[1].replace("\u00a0", "").trim() + " +02:00");
-	}
-
-	private ZonedDateTime parseBegin(Document doc) {
-		String date = doc.select("div.conference-date").text();
-		String period = doc.select("div.conference-time").text();
-		return TP.parse(date + " " + period.split("-")[0].replace("\u00a0", "").trim() + " +02:00");
+	@Override
+	public List<CalendarEvent> parse(Document doc) {
+		return Collections.singletonList(new CalendarEvent(parseTitle(doc), parseBegin(doc), parseEnd(doc), "Microsoft München"));
 	}
 
 	private String parseTitle(Document doc) {
@@ -39,13 +35,15 @@ public class AzureSaturdayParser implements IEventParser {
 		return titles.stream().findFirst().orElseThrow(() -> new IllegalStateException("no title found")).text();
 	}
 
-	@Override
-	public List<String> getBaseUris() {
-		return Arrays.asList("azuresaturday.de");
+	private ZonedDateTime parseBegin(Document doc) {
+		String date = doc.select("div.conference-date").text();
+		String period = doc.select("div.conference-time").text();
+		return TP.parse(date + " " + period.split("-")[0].replace("\u00a0", "").trim() + " +02:00", ZoneId.of("Europe/Berlin"));
 	}
 
-	@Override
-	public List<CalendarEvent> parse(Document doc) {
-		return Arrays.asList(new CalendarEvent(parseTitle(doc), parseBegin(doc), parseEnd(doc), "Microsoft München"));
+	private ZonedDateTime parseEnd(Document doc) {
+		String date = doc.select("div.conference-date").text();
+		String period = doc.select("div.conference-time").text();
+		return TP.parse(date + " " + period.split("-")[1].replace("\u00a0", "").trim() + " +02:00", ZoneId.of("Europe/Berlin"));
 	}
 }

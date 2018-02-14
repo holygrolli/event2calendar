@@ -2,3 +2,5 @@ de.networkchallenge.e2c.lambda.backend.parser.impl.AzureSaturdayParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.DevOpsConParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.DokLeipzigParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.JaxParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.ApiConferenceParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.JaxLondonParser

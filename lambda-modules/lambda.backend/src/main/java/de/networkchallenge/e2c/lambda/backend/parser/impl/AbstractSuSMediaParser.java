@@ -6,6 +6,7 @@ import de.networkchallenge.e2c.lambda.backend.parser.impl.util.SuSMediaDateParse
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,13 @@ public abstract class AbstractSuSMediaParser implements IEventParser {
     @Override
     public abstract List<String> getBaseUris();
 
+    private ZonedDateTime parseBegin(Document doc) {
+        Elements sessionInfo = doc.select("span.ws-label");
+        String date = sessionInfo.first().ownText().split(",")[1].trim();
+        String period = sessionInfo.select("span").get(1).text();
+        return SuSMediaDateParser.parseLocaleDateTime(doc, date + " " + period.split(" - ")[0], getZoneId());
+    }
+
     @Override
     public List<CalendarEvent> parse(Document doc) {
         return Collections.singletonList(new CalendarEvent(parseTitle(doc), parseBegin(doc), parseEnd(doc), getLocation()));
@@ -30,18 +38,13 @@ public abstract class AbstractSuSMediaParser implements IEventParser {
         return titles.stream().findFirst().orElseThrow(() -> new IllegalStateException("no title found")).text();
     }
 
-    private ZonedDateTime parseBegin(Document doc) {
-        Elements sessionInfo = doc.select("span.ws-label");
-        String date = sessionInfo.first().ownText().split(",")[1].trim();
-        String period = sessionInfo.select("span").get(1).text();
-        return SuSMediaDateParser.parseLocaleDateTime(doc, date + " " + period.split(" - ")[0] + " +02:00");
-    }
+    abstract ZoneId getZoneId();
 
     private ZonedDateTime parseEnd(Document doc) {
         Elements sessionInfo = doc.select("span.ws-label");
         String date = sessionInfo.first().ownText().split(",")[1].trim();
         String period = sessionInfo.select("span").get(1).text();
-        return SuSMediaDateParser.parseLocaleDateTime(doc, date + " " + period.split(" - ")[1] + " +02:00");
+        return SuSMediaDateParser.parseLocaleDateTime(doc, date + " " + period.split(" - ")[1], getZoneId());
     }
 
     /**

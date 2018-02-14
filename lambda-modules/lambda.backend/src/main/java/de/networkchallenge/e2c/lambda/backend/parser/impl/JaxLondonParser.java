@@ -4,24 +4,19 @@ import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Parser for jax.de
- */
-public class JaxParser extends AbstractSuSMediaParser {
-
+public class JaxLondonParser extends AbstractSuSMediaParser {
     @Override
     public List<String> getBaseUris() {
-        return Collections.singletonList("jax.de");
+        return Collections.singletonList("finance.jaxlondon.com");
     }
 
     @Override
     ZoneId getZoneId() {
-        return ZoneId.of("Europe/Berlin");
+        return ZoneId.of("Europe/London");
     }
 
     @Override
     protected String getLocation() {
-        return "Rheingoldhalle, Mainz";
+        return "Park Plaza Victoria, London";
     }
-
 }

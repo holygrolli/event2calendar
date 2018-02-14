@@ -1,8 +1,6 @@
-/**
- * 
- */
 package de.networkchallenge.e2c.lambda.backend.parser.impl.util;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -20,7 +18,7 @@ public class TimeParser {
 		this.sourceLocale = sourceLocale;
 	}
 
-	public ZonedDateTime parse(String input) {
-		return ZonedDateTime.parse(input, DateTimeFormatter.ofPattern(pattern, sourceLocale));
+	public ZonedDateTime parse(String input, ZoneId timezone) {
+		return ZonedDateTime.parse(input, DateTimeFormatter.ofPattern(pattern, sourceLocale).withZone(timezone));
 	}
 }
