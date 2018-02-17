@@ -18,7 +18,7 @@ import java.util.Locale;
  */
 public class AzureSaturdayParser implements IEventParser {
 
-	private final static TimeParser TP = new TimeParser("MMMM d, uuuu HH:mm xxx", Locale.US);
+    private final static TimeParser TP = new TimeParser("MMMM d, uuuu HH:mm", Locale.US);
 
 	@Override
 	public List<String> getBaseUris() {
@@ -38,12 +38,12 @@ public class AzureSaturdayParser implements IEventParser {
 	private ZonedDateTime parseBegin(Document doc) {
 		String date = doc.select("div.conference-date").text();
 		String period = doc.select("div.conference-time").text();
-		return TP.parse(date + " " + period.split("-")[0].replace("\u00a0", "").trim() + " +02:00", ZoneId.of("Europe/Berlin"));
-	}
+        return TP.parse(date + " " + period.split("-")[0].replace("\u00a0", "").trim(), ZoneId.of("Europe/Berlin"));
+    }
 
 	private ZonedDateTime parseEnd(Document doc) {
 		String date = doc.select("div.conference-date").text();
 		String period = doc.select("div.conference-time").text();
-		return TP.parse(date + " " + period.split("-")[1].replace("\u00a0", "").trim() + " +02:00", ZoneId.of("Europe/Berlin"));
-	}
+        return TP.parse(date + " " + period.split("-")[1].replace("\u00a0", "").trim(), ZoneId.of("Europe/Berlin"));
+    }
 }
