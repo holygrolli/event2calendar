@@ -4,10 +4,14 @@ import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
-public class JaxLondonParser extends AbstractSuSMediaParser {
+/**
+ * Parser for javascript-conference.com
+ */
+public class JScriptConParser extends AbstractSuSMediaParser {
+
     @Override
     public List<String> getBaseUris() {
-        return Collections.singletonList("finance.jaxlondon.com");
+        return Collections.singletonList("javascript-conference.com");
     }
 
     @Override
@@ -17,6 +21,7 @@ public class JaxLondonParser extends AbstractSuSMediaParser {
 
     @Override
     protected String getLocation() {
-        return "Park Plaza Victoria, London";
+        return "Business Design Centre, London";
     }
+
 }

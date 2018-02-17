@@ -4,19 +4,23 @@ import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
-public class ApiConferenceParser extends AbstractSuSMediaOldLayoutParser {
+/**
+ * @author Andreas
+ */
+public class BastaParser extends AbstractSuSMediaParser {
     @Override
     public List<String> getBaseUris() {
-        return Collections.singletonList("apiconference.net");
+        return Collections.singletonList("basta.net");
     }
 
     @Override
     ZoneId getZoneId() {
-        return ZoneId.of("Europe/London");
+        return ZoneId.of("Europe/Berlin");
     }
 
     @Override
     protected String getLocation() {
-        return "Business Design Centre, London";
+        return "Frankfurt Marriott Hotel";
     }
+
 }

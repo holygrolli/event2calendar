@@ -3,4 +3,8 @@ de.networkchallenge.e2c.lambda.backend.parser.impl.DevOpsConParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.DokLeipzigParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.JaxParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.ApiConferenceParser
-de.networkchallenge.e2c.lambda.backend.parser.impl.JaxLondonParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.FinanceJaxLondonParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.BastaParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.IotConParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.MobileTechConParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.JScriptConParser
