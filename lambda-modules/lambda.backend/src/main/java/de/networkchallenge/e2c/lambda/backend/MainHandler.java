@@ -7,13 +7,13 @@ import com.amazonaws.serverless.proxy.spark.SparkLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import de.networkchallenge.e2c.lambda.backend.handler.UrlController;
+import de.networkchallenge.e2c.lambda.backend.handler.VersionController;
 import spark.Spark;
 
 import static spark.Spark.before;
 
 /**
- * Hello world!
- *
+ * MainHandler for all API-Gateway proxy requests
  */
 public class MainHandler implements RequestHandler<AwsProxyRequest, AwsProxyResponse>
 {
@@ -22,22 +22,26 @@ public class MainHandler implements RequestHandler<AwsProxyRequest, AwsProxyResp
             SparkLambdaContainerHandler.getAwsProxyHandler();
     private boolean initialized = false;
 
-    public MainHandler() throws ContainerInitializationException {
+    MainHandler() throws ContainerInitializationException {
+    }
+
+    public static void main(String... args) {
+        initSpark();
     }
 
     public AwsProxyResponse handleRequest(AwsProxyRequest awsProxyRequest, Context context) {
         if (!initialized) {
             initialized = true;
-            defineRoutes();
-            Spark.awaitInitialization();
+            initSpark();
         }
         return handler.proxy(awsProxyRequest, context);
     }
 
-    public static void main(String... args){
+    private static void initSpark() {
         defineRoutes();
         Spark.awaitInitialization();
     }
+
     private static void defineRoutes() {
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
@@ -45,5 +49,6 @@ public class MainHandler implements RequestHandler<AwsProxyRequest, AwsProxyResp
             response.type("application/json");
         });
         new UrlController();
+        new VersionController();
     }
 }

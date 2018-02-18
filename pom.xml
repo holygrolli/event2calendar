@@ -8,6 +8,10 @@
 
 	<name>event2calendar multimodule</name>
 	<url>http://maven.apache.org</url>
+	<scm>
+		<connection>scm:git:git://github.com/adulescentulus/event2calendar.git</connection>
+		<url>https://github.com/adulescentulus/event2calendar</url>
+	</scm>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
