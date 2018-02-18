@@ -76,6 +76,7 @@
 				</executions>
 				<configuration>
 					<attach>true</attach>
+					<revisionOnScmFailure>GitError</revisionOnScmFailure>
 					<!--make it available for jar/war classpath resource -->
 					<addOutputDirectoryToResources>true</addOutputDirectoryToResources>
 				</configuration>
