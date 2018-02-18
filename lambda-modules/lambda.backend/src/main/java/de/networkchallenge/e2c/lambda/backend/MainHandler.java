@@ -22,7 +22,12 @@ public class MainHandler implements RequestHandler<AwsProxyRequest, AwsProxyResp
             SparkLambdaContainerHandler.getAwsProxyHandler();
     private boolean initialized = false;
 
-    MainHandler() throws ContainerInitializationException {
+    /**
+     * Lambda needs this to be public!
+     *
+     * @throws ContainerInitializationException
+     */
+    public MainHandler() throws ContainerInitializationException {
     }
 
     public static void main(String... args) {
