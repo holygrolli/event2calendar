@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker { 
-                    image 'maven/3.5.3-jdk-8-alpine'
+                    image 'maven:3.5.3-jdk-8-alpine'
                     reuseNode true
                     args '-v mvn-repo:/root/.m2'
                 }
