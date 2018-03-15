@@ -37,7 +37,7 @@ pipeline {
                     cd cfn
                     chmod +x prepare_template.sh
                     ./prepare_template.sh
-                    aws cloudformation package --template aws-resources.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
+                    aws cloudformation package --template aws-resources.yml --s3-bucket nc-infrastructure-infrabucket-1qrzmjyascfar --output-template template-export.yml
                     aws cloudformation deploy  --template-file=template-export.yml --stack-name="${STACK_NAME}" --capabilities=CAPABILITY_NAMED_IAM
                     '''
             }
