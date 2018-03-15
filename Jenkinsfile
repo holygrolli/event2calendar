@@ -27,9 +27,9 @@ pipeline {
             }
             environment {
                 AWS_DEFAULT_REGION = 'eu-central-1'
-                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_EVENT2CALENDAR_ID')
-                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_EVENT2CALENDAR_KEY')
-                STACK_NAME = 'awscodestar-event2calendar-lambda'
+                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_IMGRESIZE_ID')
+                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_IMGRESIZE_KEY')
+                STACK_NAME = 'event2calendar-lambda-test'
             }
             steps {
                 s3Upload consoleLogLevel: 'INFO', dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'cfn-infra-jenkins-artifacts', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: true, noUploadOnFailure: true, selectedRegion: 'eu-central-1', showDirectlyInBrowser: false, sourceFile: '**/target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'ARTIFACTS', userMetadata: []
