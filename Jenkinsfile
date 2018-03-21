@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker { 
-                    image '3.5.3-jdk-8-alpine'
+                    image 'maven:3.5.3-jdk-8-alpine'
                     reuseNode true
                     args '-v mvn_repo:/tmp/.m2 -e MAVEN_CONFIG=/tmp/.m2'
                 }
@@ -42,8 +42,8 @@ pipeline {
             }
             environment {
                 AWS_DEFAULT_REGION = 'eu-central-1'
-                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_EVENT2CALENDAR_ID')
-                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_EVENT2CALENDAR_KEY')
+                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_IMGRESIZE_ID')
+                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_IMGRESIZE_KEY')
                 STACK_NAME = 'awscodestar-event2calendar-lambda'
                 S3_BUCKET = 'nc-infrastructure-infrabucket-1qrzmjyascfar'
             }
