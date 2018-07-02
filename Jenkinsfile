@@ -9,9 +9,9 @@ pipeline {
     stages {
     	stage ('Initialize') {
             agent {
-                docker { 
+                docker {
                     image 'alpine'
-                    reuseNode true 
+                    reuseNode true
                     args '-u root -v mvn_repo:/tmp/.m2'
                 }
             }
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Build') {
             agent {
-                docker { 
+                docker {
                     image 'maven:3.5.3-jdk-8-alpine'
                     reuseNode true
                     args '-v mvn_repo:/tmp/.m2 -e MAVEN_CONFIG=/tmp/.m2'
@@ -35,17 +35,17 @@ pipeline {
         }
         stage('Deploy') {
             agent {
-                docker { 
+                docker {
                     image 'grolland/aws-cli'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
                 AWS_DEFAULT_REGION = 'eu-central-1'
-                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_IMGRESIZE_ID')
-                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_IMGRESIZE_KEY')
-                STACK_NAME = 'awscodestar-event2calendar-lambda'
-                S3_BUCKET = 'nc-infrastructure-infrabucket-1qrzmjyascfar'
+                AWS_ACCESS_KEY_ID = credentials('AWS_KEY_E2C_ID')
+                AWS_SECRET_ACCESS_KEY = credentials('AWS_KEY_E2C_SECRET')
+                STACK_NAME = 'event2calendar'
+                S3_BUCKET = 'nc-projects-infrabucket'
             }
             steps {
                 s3Upload consoleLogLevel: 'INFO', dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'cfn-infra-jenkins-artifacts', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: true, noUploadOnFailure: true, selectedRegion: 'eu-central-1', showDirectlyInBrowser: false, sourceFile: '**/target/*.jar', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'ARTIFACTS', userMetadata: []
@@ -59,8 +59,8 @@ pipeline {
             }
         }
     }
-    post { 
-        always { 
+    post {
+        always {
             cleanWs()
         }
     }
