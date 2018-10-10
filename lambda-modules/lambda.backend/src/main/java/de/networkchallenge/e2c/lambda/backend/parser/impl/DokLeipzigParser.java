@@ -2,6 +2,7 @@ package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
+import de.networkchallenge.e2c.lambda.backend.parser.impl.util.SuSMediaDateParser;
 import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,10 +19,11 @@ import java.util.Locale;
 
 public class DokLeipzigParser implements IEventParser {
     private final static TimeParser TP = new TimeParser("dd.MM.yyyy HH:mm", Locale.GERMANY);
+    private final static TimeParser TP_EN = new TimeParser("dd/MM/yyyy HH:mm", Locale.ENGLISH);
 
     @Override
     public List<String> getBaseUris() {
-        return Arrays.asList("films2017.dok-leipzig.de","filmfinder.dok-leipzig.de");
+        return Arrays.asList("films2018.dok-leipzig.de", "films2017.dok-leipzig.de","filmfinder.dok-leipzig.de");
     }
 
     @Override
@@ -29,13 +31,13 @@ public class DokLeipzigParser implements IEventParser {
         String title = parseTitle(doc);
         Elements eventItems = findEventItems(doc);
         ArrayList<CalendarEvent> calendarEvents = new ArrayList<>();
-        eventItems.stream().forEach((element) -> {calendarEvents.add(parseEventItem(element, title));
+        eventItems.stream().forEach((element) -> {calendarEvents.add(parseEventItem(doc, element, title));
         });
         return calendarEvents;
     }
 
-    private CalendarEvent parseEventItem(Element event, String title) {
-        return new CalendarEvent(title, parseBegin(event), parseEnd(event), parseLocation(event));
+    private CalendarEvent parseEventItem(Document doc, Element event, String title) {
+        return new CalendarEvent(title, parseBegin(doc, event), parseEnd(doc, event), parseLocation(event));
     }
 
     private String parseLocation(Element element) {
@@ -61,11 +63,11 @@ public class DokLeipzigParser implements IEventParser {
         return elements;
     }
 
-    private ZonedDateTime parseEnd(Element element) {
-        return parseBegin(element).plusMinutes(90);
+    private ZonedDateTime parseEnd(Document doc, Element element) {
+        return parseBegin(doc, element).plusMinutes(90);
     }
 
-    private ZonedDateTime parseBegin(Element event) {
+    private ZonedDateTime parseBegin(Document doc, Element event) {
         String date, time;
         if (event.select("table").size()>0)
         {
@@ -77,11 +79,18 @@ public class DokLeipzigParser implements IEventParser {
             date = event.select("label").get(1).text();
             time = event.select("label").get(2).text();
         }
-        return LocalDateTime.parse(date + " " + time, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")).atZone(ZoneId.of("Europe/Berlin"));
+        return parseLocaleDateTime(doc, date + " " + time, ZoneId.of("Europe/Berlin"));
     }
 
     private String parseTitle(Document doc) {
         Elements select = doc.select("h1#mainContent");
         return select.stream().findFirst().orElseThrow(() -> new IllegalStateException("no title found")).text();
+    }
+
+    private ZonedDateTime parseLocaleDateTime(Document doc, String date, ZoneId timezone) {
+        if (doc.select("html").first().attr("lang").startsWith("en"))
+            return TP_EN.parse(date, timezone);
+        else
+            return TP.parse(date, timezone);
     }
 }

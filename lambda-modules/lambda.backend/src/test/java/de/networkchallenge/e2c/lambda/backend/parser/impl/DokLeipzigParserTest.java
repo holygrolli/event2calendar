@@ -15,8 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class DokLeipzigParserTest {
-    private static java.net.URL URL;
+    private static URL URL;
     private static URL URL2;
+    private static URL URL3;
 
     @BeforeClass
     public static void setup() {
@@ -24,6 +25,8 @@ public class DokLeipzigParserTest {
                 .getResource("parserinput/" + DokLeipzigParser.class.getSimpleName() + ".html");
         URL2 = Thread.currentThread().getContextClassLoader()
                 .getResource("parserinput/" + DokLeipzigParser.class.getSimpleName() + "2.html");
+        URL3 = Thread.currentThread().getContextClassLoader()
+                .getResource("parserinput/" + DokLeipzigParser.class.getSimpleName() + "3En.html");
     }
 
     @Test
@@ -66,6 +69,27 @@ public class DokLeipzigParserTest {
         assertEquals("CineStar 6", calendarEvents.get(1).getLocation());
         assertEquals("Hauptbahnhof Osthalle", calendarEvents.get(2).getLocation());
         assertEquals(5, calendarEvents.size());
+    }
+
+    @Test
+    public void parse3() throws IOException {
+        DokLeipzigParser parser = new DokLeipzigParser();
+        List<CalendarEvent> calendarEvents = parser.parse(Jsoup.parse(new File(URL3.getPath()), "UTF-8"));
+        assertNotNull(calendarEvents.get(0));
+        assertEquals("Saturday’s Apartment", calendarEvents.get(0).getTitle());
+        assertEquals(ZonedDateTime.parse("2018-10-30T10:00:00+01:00[Europe/Berlin]"), calendarEvents.get(0).getEventBegin());
+        assertEquals("20181030T090000Z", calendarEvents.get(0).getEventBeginGMT());
+        assertEquals(ZonedDateTime.parse("2018-10-30T11:30:00+01:00[Europe/Berlin]"), calendarEvents.get(0).getEventEnd());
+        assertEquals("20181030T103000Z", calendarEvents.get(0).getEventEndGMT());
+        assertEquals("Passage Kinos Astoria", calendarEvents.get(0).getLocation());
+        assertNotNull(calendarEvents.get(1));
+        assertEquals("Saturday’s Apartment", calendarEvents.get(1).getTitle());
+        assertEquals(ZonedDateTime.parse("2018-11-02T10:00:00+01:00[Europe/Berlin]"), calendarEvents.get(1).getEventBegin());
+        assertEquals("20181102T090000Z", calendarEvents.get(1).getEventBeginGMT());
+        assertEquals(ZonedDateTime.parse("2018-11-02T11:30:00+01:00[Europe/Berlin]"), calendarEvents.get(1).getEventEnd());
+        assertEquals("20181102T103000Z", calendarEvents.get(1).getEventEndGMT());
+        assertEquals("Passage Kinos Astoria", calendarEvents.get(1).getLocation());
+        assertEquals(2, calendarEvents.size());
     }
 
 }
