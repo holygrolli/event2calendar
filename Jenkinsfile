@@ -56,6 +56,7 @@ pipeline {
                     aws cloudformation package --template aws-resources.yml --s3-bucket $S3_BUCKET --s3-prefix event2calendar --output-template template-export.yml
                     aws cloudformation deploy  --template-file=template-export.yml --stack-name="${STACK_NAME}" --capabilities=CAPABILITY_NAMED_IAM
                     '''
+                s3Upload consoleLogLevel: 'INFO', dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'nc-infra-cfn-jenkins-artifacts', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: true, noUploadOnFailure: true, selectedRegion: 'eu-central-1', showDirectlyInBrowser: false, sourceFile: 'cfn/template-export.yml', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'ARTIFACTS', userMetadata: []
             }
         }
     }
