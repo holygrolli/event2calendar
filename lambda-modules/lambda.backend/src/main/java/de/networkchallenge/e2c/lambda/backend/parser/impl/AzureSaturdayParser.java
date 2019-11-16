@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class AzureSaturdayParser implements IEventParser {
 
 	@Override
 	public List<String> getBaseUris() {
-		return Collections.singletonList("azuresaturday.de");
+		return Arrays.asList("azuresaturday.de");
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DevOpsConParser extends AbstractSuSMediaParser {
 
     @Override
     public List<String> getBaseUris() {
-        return Collections.singletonList("devopsconference.de");
+        return Arrays.asList("devopsconference.de", "devopscon.io");
     }
 
     @Override
