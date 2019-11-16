@@ -16,6 +16,7 @@ public class ParserRegistryTest {
 	public void testRegistryHasRegisteredParsers() {
 		assertTrue(parserRegistry.getRegisteredCount() > 0);
 		assertNotNull(parserRegistry.getParserForUrl("devopsconference.de"));
+		assertNotNull(parserRegistry.getParserForUrl("devopscon.io"));
 		assertNotNull(parserRegistry.getParserForUrl("jax.de"));
 		assertNotNull(parserRegistry.getParserForUrl("azuresatureday.de"));
 		assertEquals(parserRegistry.getParserForUrl("films2017.dok-leipzig.de"),parserRegistry.getParserForUrl("filmfinder.dok-leipzig.de"));

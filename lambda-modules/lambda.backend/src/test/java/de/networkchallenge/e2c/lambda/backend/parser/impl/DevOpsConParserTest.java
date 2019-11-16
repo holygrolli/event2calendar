@@ -35,13 +35,13 @@ public class DevOpsConParserTest {
 		AbstractSuSMediaParser parser = new DevOpsConParser();
 		CalendarEvent event = parser.parse(Jsoup.parse(new File(URL.getPath()), "UTF-8")).get(0);
 		assertNotNull(event);
-		assertEquals("Es muss nicht gleich Docker sein – IT Automation, die zu einem passt", event.getTitle());
+		assertEquals("DevSecOps Psychology", event.getTitle());
         assertEquals(
-                ZonedDateTime.parse("2018-05-29T10:00:00+02:00[Europe/Berlin]"), event.getEventBegin());
-		assertEquals("20180529T080000Z", event.getEventBeginGMT());
+                ZonedDateTime.parse("2019-12-03T10:15:00+01:00[Europe/Berlin]"), event.getEventBegin());
+		assertEquals("20191203T091500Z", event.getEventBeginGMT());
         assertEquals(
-                ZonedDateTime.parse("2018-05-29T11:00:00+02:00[Europe/Berlin]"), event.getEventEnd());
-		assertEquals("20180529T090000Z", event.getEventEndGMT());
+                ZonedDateTime.parse("2019-12-03T11:15:00+01:00[Europe/Berlin]"), event.getEventEnd());
+		assertEquals("20191203T101500Z", event.getEventEndGMT());
 	}
 
 	@Test
