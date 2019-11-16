@@ -1,0 +1,38 @@
+on: push
+
+name: Deploy to AWS Lambda
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Maven package
+      id: package
+      run: |
+        # package it
+        mvn package
+
+    - name: Deploy
+      id: deploy
+      env:
+        S3_BUCKET: nc-projects-infrabucket
+        STACK_NAME: event2calendar
+      run: |
+        cd cfn
+        chmod +x prepare_template.sh
+        ./prepare_template.sh
+        aws cloudformation package --template aws-resources.yml --s3-bucket $S3_BUCKET --s3-prefix event2calendar --output-template template-export.yml
+        aws cloudformation deploy  --template-file=template-export.yml --stack-name="${STACK_NAME}" --capabilities=CAPABILITY_NAMED_IAM
+ 
