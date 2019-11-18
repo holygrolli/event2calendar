@@ -21,11 +21,15 @@ Resources:
   ParseEventFromUrlFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ../lambda-modules/lambda.backend/target/lambda.backend-runner.jar
+      CodeUri: ../lambda-modules/lambda.backend/target/function.zip
       Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
-      Runtime: java8
-      MemorySize: 256
-      Timeout: 30
+      Runtime: provided
+      MemorySize: 128
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 15
+      Environment:
+        Variables:
+          DISABLE_SIGNAL_HANDLERS: true
       Events:
         ProxyEvent:
           Type: Api

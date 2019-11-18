@@ -8,10 +8,26 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <files>
         <file>
-            <source>${project.build.directory}${file.separator}${artifactId}-${version}-runner</source>
+            <source>${project.build.directory}${file.separator}${artifactId}-runner</source>
+            <outputDirectory>/target/</outputDirectory>
+            <destName>lambda</destName>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/assembly/bootstrap</source>
             <outputDirectory>/</outputDirectory>
             <destName>bootstrap</destName>
             <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>${env.JAVA_HOME}/jre/lib/security/cacerts</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>cacerts</destName>
+        </file>
+        <file>
+            <source>${env.JAVA_HOME}/jre/lib/amd64/libsunec.so</source>
+            <outputDirectory>/lib/</outputDirectory>
+            <destName>libsunec.so</destName>
         </file>
     </files>
 </assembly>

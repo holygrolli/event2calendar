@@ -57,16 +57,6 @@
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy-jsonb</artifactId>
 		</dependency>
-		<!-- remove if not using servlets -->
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-undertow</artifactId>
-		</dependency>
-		<!-- remove if not using vertx web -->
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-vertx-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-amazon-lambda-http</artifactId>
@@ -177,6 +167,7 @@
 									</descriptors>
 									<attach>false</attach>
 									<appendAssemblyId>false</appendAssemblyId>
+									<archiveBaseDirectory>${project.build.directory}</archiveBaseDirectory>
 								</configuration>
 							</execution>
 						</executions>
