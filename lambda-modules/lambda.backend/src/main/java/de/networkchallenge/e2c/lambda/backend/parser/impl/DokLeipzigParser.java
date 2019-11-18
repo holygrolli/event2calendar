@@ -23,7 +23,7 @@ public class DokLeipzigParser implements IEventParser {
 
     @Override
     public List<String> getBaseUris() {
-        return Arrays.asList("films2018.dok-leipzig.de", "films2017.dok-leipzig.de","filmfinder.dok-leipzig.de");
+        return Arrays.asList("films2018.dok-leipzig.de", "films2019.dok-leipzig.de","filmfinder.dok-leipzig.de");
     }
 
     @Override

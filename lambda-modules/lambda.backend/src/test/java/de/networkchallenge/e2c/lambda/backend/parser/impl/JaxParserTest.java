@@ -2,16 +2,14 @@ package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import org.jsoup.Jsoup;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.net.URL;
 import java.time.ZonedDateTime;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JaxParserTest {
 
@@ -19,7 +17,7 @@ public class JaxParserTest {
     private static URL URL2;
     private static URL URL_EN;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         URL = Thread.currentThread().getContextClassLoader()
                 .getResource("parserinput/" + JaxParser.class.getSimpleName() + ".html");
@@ -31,8 +29,8 @@ public class JaxParserTest {
     @Test
     public void getBaseUris() throws Exception {
         AbstractSuSMediaParser parser = new JaxParser();
-        Assert.assertTrue(parser.getBaseUris().contains("jax.de"));
-        Assert.assertTrue(parser.getBaseUris().size() == 1);
+        assertTrue(parser.getBaseUris().contains("jax.de"));
+        assertTrue(parser.getBaseUris().size() == 1);
 
     }
 

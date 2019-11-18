@@ -3,16 +3,16 @@ package de.networkchallenge.e2c.lambda.backend.parser.impl;
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import org.jsoup.Jsoup;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Andreas
@@ -22,7 +22,7 @@ public class AzureSaturdayParserTest {
 	private static URL URL;
 	private static URL URL2;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setup() {
 		URL = Thread.currentThread().getContextClassLoader()
 				.getResource("parserinput/" + AzureSaturdayParser.class.getSimpleName() + ".html");

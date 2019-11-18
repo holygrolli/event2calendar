@@ -3,20 +3,20 @@ package de.networkchallenge.e2c.lambda.backend.parser.impl;
 import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
 import de.networkchallenge.e2c.lambda.backend.parser.api.IEventParser;
 import org.jsoup.Jsoup;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.ZonedDateTime;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ApiConferenceParserTest {
 
     private static java.net.URL URL;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         URL = Thread.currentThread().getContextClassLoader()
                 .getResource("parserinput/" + ApiConferenceParser.class.getSimpleName() + ".html");
