@@ -44,7 +44,7 @@ jobs:
         env:
           STACK_NAME_BASE: event2calendar
         run: |
-          [[ ! -z "${GITHUB_REF}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${{ env.GITHUB_REF_SLUG }} || export STACK_NAME=${STACK_NAME_BASE}
+          [[ "master" != "${GITHUB_REF}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${{ env.GITHUB_REF_SLUG }} || export STACK_NAME=${STACK_NAME_BASE}
           echo "::set-env name=STACK_NAME::${STACK_NAME}"
 
       - name: Deploy
