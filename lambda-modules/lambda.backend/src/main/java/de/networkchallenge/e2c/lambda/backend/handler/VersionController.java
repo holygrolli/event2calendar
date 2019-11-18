@@ -1,29 +1,26 @@
 package de.networkchallenge.e2c.lambda.backend.handler;
 
-import com.google.gson.Gson;
 import de.networkchallenge.e2c.lambda.backend.model.VersionResponse;
-import spark.Request;
-import spark.Response;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static spark.Spark.get;
-
 /**
  * REST endpoint for showing version information
  */
+@Path("/version")
 public class VersionController {
     private static final String FILE_PATH = "build.properties";
     private static final Properties PROPERTIES = loadPropertiesFromPackage();
 
-    public VersionController() {
-        Gson gson = new Gson();
-        get("/version", VersionController::getVersion, gson::toJson);
-    }
-
-    private static VersionResponse getVersion(Request request, Response response) {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public VersionResponse getVersion() {
         return new VersionResponse(PROPERTIES.getProperty("timestamp", "0"), PROPERTIES.getProperty("revision"));
     }
 

@@ -3,6 +3,12 @@ AWSTemplateFormatVersion: 2010-09-09
 Transform:
 - AWS::Serverless-2016-10-31
 
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+    BinaryMediaTypes:
+      - "*/*"
+
 Resources:
   Api:
     Type: AWS::Serverless::Api
@@ -12,33 +18,14 @@ Resources:
       Variables:
         LambdaFunctionName: !Ref ParseEventFromUrlFunction
 
-  AddToCalendarBucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
-    Properties:
-      AccessControl: PublicRead
-      BucketName: e2c.networkchallenge.de
-      WebsiteConfiguration:
-        IndexDocument: index.html
-
   ParseEventFromUrlFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ../lambda-modules/lambda.backend/target/lambda.backend.jar
-      Handler: de.networkchallenge.e2c.lambda.backend.MainHandler
+      CodeUri: ../lambda-modules/lambda.backend/target/lambda.backend-runner.jar
+      Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Runtime: java8
       MemorySize: 256
       Timeout: 30
-      Environment:
-        Variables:
-          BUCKET: !Ref AddToCalendarBucket
-          URL: !GetAtt AddToCalendarBucket.WebsiteURL
-      Policies:
-          Statement:
-            - Resource: !Sub arn:aws:s3:::${AddToCalendarBucket}/*
-              Effect: Allow
-              Action:
-                - s3:PutObject
       Events:
         ProxyEvent:
           Type: Api
@@ -55,19 +42,7 @@ Resources:
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*
 
-  AddToCalendarBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref AddToCalendarBucket
-      PolicyDocument:
-        Statement:
-          - Action: s3:GetObject
-            Effect: Allow
-            Principal: "*"
-            Resource: !Sub arn:aws:s3:::${AddToCalendarBucket}/*
-
 Outputs:
-  BucketWebsiteUrl:
-    Value: !GetAtt AddToCalendarBucket.WebsiteURL
-  Bucket:
-    Value: !Ref AddToCalendarBucket
+  LambdaEndpoint:
+    Description: API Gateway URL of the Lambda Function
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/prod/"

@@ -1,0 +1,98 @@
+on:
+  push:
+    branches:
+      - '**'
+  delete:
+
+name: Deploy to AWS Lambda
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-18.04
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Cache mvn repo
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Maven package
+        id: package
+        run: |
+          # package it
+          mvn -B package
+
+      - name: Define slug variables
+        uses: rlespinasse/github-slug-action@1.1.0
+
+      - name: Set STACK_NAME
+        env:
+          STACK_NAME_BASE: event2calendar
+        run: |
+          [[ ! -z "${GITHUB_REF}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${{ env.GITHUB_REF_SLUG }} || export STACK_NAME=${STACK_NAME_BASE}
+          echo "::set-env name=STACK_NAME::${STACK_NAME}"
+
+      - name: Deploy
+        id: deploy
+        env:
+          S3_BUCKET: nc-projects-infrabucket
+        working-directory: ./cfn
+        run: |
+          echo using STACK_NAME ${STACK_NAME}
+          chmod +x prepare_template.sh
+          ./prepare_template.sh
+          aws cloudformation package --template aws-resources.yml --s3-bucket $S3_BUCKET --s3-prefix event2calendar --output-template template-export.yml
+          aws cloudformation deploy  --template-file=template-export.yml --stack-name="${STACK_NAME}" --capabilities=CAPABILITY_NAMED_IAM
+          aws cloudformation describe-stacks --stack-name="${STACK_NAME}"
+
+  delete:
+    name: Delete old stack
+    runs-on: ubuntu-18.04
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Set STACK_NAME
+        env:
+          STACK_NAME_BASE: event2calendar
+          EVENT_REF: ${{ github.event.ref }}
+        run: |
+          echo debugging event.ref ${EVENT_REF}
+          export BRANCH_NAME=$(echo "$EVENT_REF" \
+               | tr "[:upper:]" "[:lower:]" \
+               | sed -r 's#refs/[^\/]*/##;s/[~\^]+//g;s/[^a-zA-Z0-9]+/-/g;s/^-+\|-+$//g;s/^-*//;s/-*$//' \
+               | cut -c1-63)
+          echo branch_name is now $BRANCH_NAME
+          [[ "master" != "${BRANCH_NAME}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${BRANCH_NAME} || export STACK_NAME=${STACK_NAME_BASE}
+          echo "new stack name ${STACK_NAME}"
+          echo "::set-env name=STACK_NAME::${STACK_NAME}"
+
+      - name: cleanup AWS
+        run: |
+          echo using STACK_NAME ${STACK_NAME}
+          aws cloudformation delete-stack --stack-name="${STACK_NAME}"
+

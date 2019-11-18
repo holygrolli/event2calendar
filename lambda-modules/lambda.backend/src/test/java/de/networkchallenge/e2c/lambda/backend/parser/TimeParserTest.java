@@ -1,14 +1,14 @@
 package de.networkchallenge.e2c.lambda.backend.parser;
 
 import de.networkchallenge.e2c.lambda.backend.parser.impl.util.TimeParser;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TimeParserTest {
 

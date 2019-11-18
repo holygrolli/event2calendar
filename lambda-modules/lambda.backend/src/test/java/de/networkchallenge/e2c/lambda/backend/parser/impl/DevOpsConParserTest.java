@@ -1,18 +1,17 @@
 package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
+import org.jsoup.Jsoup;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 
-import org.jsoup.Jsoup;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import de.networkchallenge.e2c.lambda.backend.dto.CalendarEvent;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Andreas
@@ -22,7 +21,7 @@ public class DevOpsConParserTest {
 	private static URL URL;
 	private static URL URL2;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setup() {
 		URL = Thread.currentThread().getContextClassLoader()
 				.getResource("parserinput/" + DevOpsConParser.class.getSimpleName() + ".html");

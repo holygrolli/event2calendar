@@ -1,8 +1,8 @@
 package de.networkchallenge.e2c.lambda.backend.parser.impl;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 
@@ -19,6 +19,6 @@ public class ParserRegistryTest {
 		assertNotNull(parserRegistry.getParserForUrl("devopscon.io").get());
 		assertNotNull(parserRegistry.getParserForUrl("jax.de").get());
 		assertNotNull(parserRegistry.getParserForUrl("azuresaturday.de").get());
-		assertEquals(parserRegistry.getParserForUrl("films2017.dok-leipzig.de"),parserRegistry.getParserForUrl("filmfinder.dok-leipzig.de"));
+		assertEquals(parserRegistry.getParserForUrl("films2019.dok-leipzig.de"),parserRegistry.getParserForUrl("filmfinder.dok-leipzig.de"));
 	}
 }
