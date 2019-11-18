@@ -31,6 +31,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - uses: DeLaGuardo/setup-graalvm@1.0
+        with:
+          graalvm-version: '19.2.0.1'
+
       - name: Maven package
         id: package
         run: |
@@ -44,7 +48,7 @@ jobs:
         env:
           STACK_NAME_BASE: event2calendar
         run: |
-          [[ "master" != "${GITHUB_REF_SLUG}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${{ env.GITHUB_REF_SLUG }} || export STACK_NAME=${STACK_NAME_BASE}
+          export STACK_NAME=${STACK_NAME_BASE}-${{ env.GITHUB_REF_SLUG }}
           echo "::set-env name=STACK_NAME::${STACK_NAME}"
 
       - name: Deploy
@@ -87,7 +91,7 @@ jobs:
                | sed -r 's#refs/[^\/]*/##;s/[~\^]+//g;s/[^a-zA-Z0-9]+/-/g;s/^-+\|-+$//g;s/^-*//;s/-*$//' \
                | cut -c1-63)
           echo branch_name is now $BRANCH_NAME
-          [[ "master" != "${BRANCH_NAME}" ]] && export STACK_NAME=${STACK_NAME_BASE}-${BRANCH_NAME} || export STACK_NAME=${STACK_NAME_BASE}
+          export STACK_NAME=${STACK_NAME_BASE}-${BRANCH_NAME}
           echo "new stack name ${STACK_NAME}"
           echo "::set-env name=STACK_NAME::${STACK_NAME}"
 
