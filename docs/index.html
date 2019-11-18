@@ -118,15 +118,15 @@
                 var request = {
                     url: uri,
                     type: method,
-                    contentType: "application/json",
+                    /*contentType: "application/json",
                     accepts: {
                         json: "application/json"
                     },
                     cache: true,
-                    dataType: 'json',
+                    dataType: 'json',*/
                     //data: JSON.stringify(data),
                     /*beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", 
+                        xhr.setRequestHeader("Authorization",
                             "Basic " + btoa(self.username + ":" + self.password));
                     },*/
                     beforeSend: function(){$("#loading").show();},
