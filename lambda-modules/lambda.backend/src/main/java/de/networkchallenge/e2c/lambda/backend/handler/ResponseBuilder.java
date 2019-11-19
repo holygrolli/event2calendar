@@ -52,6 +52,7 @@ public class ResponseBuilder {
             }
         }
         else {
+            System.err.println("Registered parsers: " + registry.getRegisteredCount());
             System.err.println("URL not supported: " + url);
             responseObject.setStatus(ResponseObject.Status.URL_NOT_SUPPORTED);
         }

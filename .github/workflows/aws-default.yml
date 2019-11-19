@@ -33,13 +33,20 @@ jobs:
 
       - uses: DeLaGuardo/setup-graalvm@1.0
         with:
-          graalvm-version: '19.2.0.1'
+          graalvm-version: '19.2.1'
 
       - name: Maven package
         id: package
         run: |
+          ${JAVA_HOME}/bin/gu install native-image
           # package it
-          mvn -B package
+          mvn -B package -Pnative
+
+      - name: Archive function.zip
+        uses: actions/upload-artifact@v1
+        with:
+          name: function.zip
+          path: lambda-modules/lambda.backend/target/function.zip
 
       - name: Define slug variables
         uses: rlespinasse/github-slug-action@1.1.0

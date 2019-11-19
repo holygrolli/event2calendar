@@ -1,0 +1,2 @@
+#!/bin/sh
+$LAMBDA_TASK_ROOT/target/lambda -Djava.library.path=$LAMBDA_TASK_ROOT/lib -Djavax.net.ssl.trustStore=$LAMBDA_TASK_ROOT/cacerts

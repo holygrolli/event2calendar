@@ -14,4 +14,28 @@ public class VersionResponse {
         this.timestampISO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(Long.parseLong(timestamp)), ZoneId.of("Europe/Berlin")).toString();
         this.gitHash = gitHash;
     }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getGitHash() {
+        return gitHash;
+    }
+
+    public void setGitHash(String gitHash) {
+        this.gitHash = gitHash;
+    }
+
+    public String getTimestampISO() {
+        return timestampISO;
+    }
+
+    public void setTimestampISO(String timestampISO) {
+        this.timestampISO = timestampISO;
+    }
 }
