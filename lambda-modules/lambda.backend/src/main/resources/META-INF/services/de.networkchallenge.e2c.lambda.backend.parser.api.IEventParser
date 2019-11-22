@@ -8,3 +8,4 @@ de.networkchallenge.e2c.lambda.backend.parser.impl.BastaParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.IotConParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.MobileTechConParser
 de.networkchallenge.e2c.lambda.backend.parser.impl.JScriptConParser
+de.networkchallenge.e2c.lambda.backend.parser.impl.DemoParser
