@@ -78,7 +78,7 @@ jobs:
           echo Using endpoint ${ENDPOINT}
           curl -s ${ENDPOINT}/version
           echo -n Checking demoevent ...
-          test "Exciting Event" == $(curl -s ${ENDPOINT}/url/aHR0cDovL2UyYy5uZXR3b3JrY2hhbGxlbmdlLmRlL2RlbW8vZXZlbnRkZW1vLmh0bWw= | jq '.events[0] | .eventTitle')
+          test "Exciting Event" == "$(curl -s '${ENDPOINT}/url/aHR0cDovL2UyYy5uZXR3b3JrY2hhbGxlbmdlLmRlL2RlbW8vZXZlbnRkZW1vLmh0bWw=' | jq -r '.events[0] | .eventTitle')"
           echo done.
   delete:
     name: Delete old stack
