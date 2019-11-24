@@ -44,12 +44,6 @@ jobs:
           # package it
           mvn -B package -Pnative
 
-      - name: Archive function.zip
-        uses: actions/upload-artifact@v1
-        with:
-          name: function.zip
-          path: lambda-modules/lambda.backend/target/function.zip
-
       - name: Define slug variables
         uses: rlespinasse/github-slug-action@1.1.0
 
