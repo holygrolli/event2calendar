@@ -2,8 +2,8 @@ on:
   push:
     paths-ignore:
       - 'docs/*'
-    branches:
-      - '**'
+    branches-ignore:
+      - 'wip-**'
   delete:
 
 name: Deploy to AWS Lambda

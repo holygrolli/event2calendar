@@ -7,50 +7,22 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>lambda.backend</artifactId>
+	<artifactId>lambda.starter</artifactId>
 	<packaging>jar</packaging>
 
-	<name>lambda.backend</name>
+	<name>lambda.starter</name>
 
 	<properties>
 	</properties>
-		<!--<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-			<scope>test</scope>
-		</dependency>
-
-	</dependencies>-->
 	<dependencies>
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.10.2</version>
-		</dependency>
-
-		<!-- remove if not using jaxrs -->
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-resteasy</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-resteasy-jsonb</artifactId>
+			<groupId>de.networkchallenge.e2c</groupId>
+			<artifactId>lambda.backend</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-amazon-lambda-http</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-junit5</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -61,7 +33,7 @@
 			<version>${quarkus.version}</version>
 			<configuration>
 				<uberJar>true</uberJar>
-				<finalName>lambda.backend</finalName>
+				<finalName>lambda.starter</finalName>
 			</configuration>
 			<executions>
 				<execution>
@@ -84,30 +56,11 @@
 				</systemProperties>
 			</configuration>
 		</plugin>
-		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>buildnumber-maven-plugin</artifactId>
-			<version>1.4</version>
-			<executions>
-				<execution>
-					<phase>generate-resources</phase>
-					<goals>
-						<goal>create-metadata</goal>
-					</goals>
-				</execution>
-			</executions>
-			<configuration>
-				<attach>true</attach>
-				<revisionOnScmFailure>GitError</revisionOnScmFailure>
-				<!--make it available for jar/war classpath resource -->
-				<addOutputDirectoryToResources>true</addOutputDirectoryToResources>
-			</configuration>
-		</plugin>
 	</plugins>
 	</build>
 	<profiles>
 		<profile>
-			<id>nativeimg</id>
+			<id>native</id>
 			<activation>
 				<property>
 					<name>native</name>
@@ -126,6 +79,29 @@
 								</goals>
 								<configuration>
 									<enableHttpUrlHandler>true</enableHttpUrlHandler>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>3.1.0</version>
+						<executions>
+							<execution>
+								<id>zip-assembly</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<finalName>function</finalName>
+									<descriptors>
+										<descriptor>src/assembly/zip.xml</descriptor>
+									</descriptors>
+									<attach>false</attach>
+									<appendAssemblyId>false</appendAssemblyId>
+									<archiveBaseDirectory>${project.build.directory}</archiveBaseDirectory>
 								</configuration>
 							</execution>
 						</executions>
