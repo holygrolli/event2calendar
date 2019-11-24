@@ -21,7 +21,7 @@ Resources:
   ParseEventFromUrlFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ../lambda-modules/lambda.backend/target/function.zip
+      CodeUri: ../lambda-modules/lambda.starter/target/function.zip
       Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Runtime: provided
       MemorySize: 128
