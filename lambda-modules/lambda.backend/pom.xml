@@ -86,7 +86,8 @@
 			<version>1.4</version>
 			<executions>
 				<execution>
-					<phase>generate-resources</phase>
+					<phase>none</phase>
+<!--					<phase>generate-resources</phase>-->
 					<goals>
 						<goal>create-metadata</goal>
 					</goals>
