@@ -1,8 +1,10 @@
 FROM quay.io/quarkus/centos-quarkus-maven:19.2.1 as build
 WORKDIR /project
 
-COPY pom.xml /project/
-COPY e2c-bot jsoup.html.downloader lambda-modules /project/
+COPY pom.xml .
+COPY e2c-bot e2c-bot
+COPY jsoup.html.downloader jsoup.html.downloader
+COPY lambda-modules lambda-modules
 
 RUN ls -al /project/ && echo "#####" && ls -al .
 RUN mvn -B clean package -Pbotnative
