@@ -3,6 +3,8 @@ package de.networkchallenge.e2c.bot;
 import com.google.gson.Gson;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.request.SetWebhook;
+import com.pengrad.telegrambot.response.BaseResponse;
 import de.networkchallenge.e2c.lambda.backend.handler.ResponseBuilder;
 import de.networkchallenge.e2c.lambda.backend.model.ResponseEvent;
 import de.networkchallenge.e2c.lambda.backend.model.ResponseObject;
@@ -17,17 +19,19 @@ import java.net.URL;
 
 @Path("/bot")
 public class BotConroller {
-    private final Gson gson;
     TelegramBot bot;
 
     public BotConroller()
     {
-        bot = new TelegramBot(System.getenv("BOT_TOKEN"));
-        gson = new Gson();
-        /*SetWebhook request = new SetWebhook()
-                .url("https://e2c.networkchallenge.de");
+        if (System.getenv("BOT_TOKEN") != null &&  System.getenv("ENDPOINT_URL") != null)
+        {
+            bot = new TelegramBot(System.getenv("BOT_TOKEN"));
+        //gson = new Gson();
+        SetWebhook request = new SetWebhook()
+                .url(System.getenv("ENDPOINT_URL"));
         BaseResponse response = bot.execute(request);
-        boolean ok = response.isOk();*/
+        boolean ok = response.isOk();
+        }
     }
 
     @POST
