@@ -1,2 +1,2 @@
 #!/bin/sh
-$LAMBDA_TASK_ROOT/target/lambda -Djava.library.path=$LAMBDA_TASK_ROOT/lib -Djavax.net.ssl.trustStore=$LAMBDA_TASK_ROOT/cacerts
+$LAMBDA_TASK_ROOT/target/lambda -Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=${PORT} -Djava.library.path=$LAMBDA_TASK_ROOT/lib -Djavax.net.ssl.trustStore=$LAMBDA_TASK_ROOT/cacerts

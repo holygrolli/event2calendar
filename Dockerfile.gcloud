@@ -22,5 +22,6 @@ RUN cd /project && \
 
 #USER quarkus
 ENV LAMBDA_TASK_ROOT=/project
-EXPOSE 8080
+ENV PORT=8080
+EXPOSE ${PORT}
 CMD /project/bootstrap
