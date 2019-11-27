@@ -9,7 +9,7 @@ COPY lambda-modules lambda-modules
 USER root
 RUN ls -al /project/ && echo "#####" && chown -R quarkus:root . && ls -al .
 USER quarkus
-RUN mvn -B clean package -Pbotnative
+RUN mvn -B clean package -Pbotnative -Dnative-image.container-runtime=docker
 
 FROM quay.io/quarkus/centos-quarkus-maven:19.2.1
 COPY --from=build /project/e2c-bot/target/function.zip /project
