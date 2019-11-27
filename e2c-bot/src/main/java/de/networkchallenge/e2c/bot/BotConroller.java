@@ -13,6 +13,7 @@ import de.networkchallenge.e2c.lambda.backend.parser.impl.ParserRegistry;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,8 +38,9 @@ public class BotConroller {
     @POST
     @Path("update")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String webhook(Update update) {
-        System.out.println("MessageID: " + update.getMessage().getMessage_id() + ", ChatID: " + update.getMessage().getChat().getId());
+        System.out.println("MessageID: " + update.getMessage().getMessage_id() + ", ChatID: " + update.getMessage().getChat().getId() + ", Text: " + update.getMessage().getText());
         ResponseObject eventRespone;
         try {
             eventRespone = new ResponseBuilder(ParserRegistry.getInstance(), new URL(update.getMessage().getText())).build();
@@ -56,7 +58,12 @@ public class BotConroller {
             {
                 stringBuilder.append(e.getEventTitle() + " am " + e.getEventBegin() + "\n");
             }
-            return new SendMessage(update.getMessage().getChat().getId(), stringBuilder.toString()).toWebhookResponse();
+            String text = stringBuilder.toString();
+            String response = new SendMessage(update.getMessage().getChat().getId(), text).toWebhookResponse();
+            System.out.println(response);
+            if (bot != null)
+                bot.execute(new SendMessage(update.getMessage().getChat().getId(), text));
+            return response;
         }
         /*StringBuilder stringBuilder = new StringBuilder();
         stringBuilder  = stringBuilder.append("Folgende Ereignisse habe ich gefunden:\n");
