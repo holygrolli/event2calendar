@@ -94,7 +94,7 @@
 			</executions>
 			<configuration>
 				<attach>true</attach>
-				<revisionOnScmFailure>GitError</revisionOnScmFailure>
+				<revisionOnScmFailure>no-scm</revisionOnScmFailure>
 				<!--make it available for jar/war classpath resource -->
 				<addOutputDirectoryToResources>true</addOutputDirectoryToResources>
 			</configuration>
