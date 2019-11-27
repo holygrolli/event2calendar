@@ -21,6 +21,7 @@
 	<modules>
 		<module>lambda-modules</module>
 		<module>jsoup.html.downloader</module>
+		<module>e2c-bot</module>
 	</modules>
 
 	<build>

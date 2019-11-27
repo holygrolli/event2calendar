@@ -1,0 +1,21 @@
+FROM quay.io/quarkus/centos-quarkus-maven:19.2.1 as build
+WORKDIR /project
+
+COPY pom.xml .
+COPY src src
+
+RUN mvn -B clean package -Pbotnative
+
+FROM quay.io/quarkus/centos-quarkus-maven:19.2.1
+COPY --from=build /project/e2c-bot/target/function.zip /project
+
+#USER root
+RUN cd /project && \
+    unzip function.zip
+#    chown quarkus /project/lambda && \
+#    chmod +x /project/lambda
+
+#USER quarkus
+ENV LAMBDA_TASK_ROOT=/project
+EXPOSE 8080
+CMD /project/bootstrap
